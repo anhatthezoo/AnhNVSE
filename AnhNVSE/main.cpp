@@ -129,13 +129,14 @@ bool Cmd_Sv_PadStart_Execute(COMMAND_ARGS) {
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &strID, &maxLength, &padChar)) {
 		const char* srcString = g_stringvarInterface->GetString(strID);
 		if (srcString) {
-			if (strlen(srcString) == maxLength) {
+			/*if (strlen(srcString) == maxLength) {
 				for (int i = strlen(srcString); i < maxLength; i++) {
 					srcString += padChar;
 				}
 				g_stringvarInterface->Assign(PASS_COMMAND_ARGS, srcString);
-			}
-			else { g_stringvarInterface->Assign(PASS_COMMAND_ARGS, srcString); }
+			} */
+			Console_Print("hi");
+			//else { g_stringvarInterface->Assign(PASS_COMMAND_ARGS, srcString); }
 
 		}
 	}
