@@ -6,6 +6,9 @@
 #include "nvse/GameForms.h"
 #include "misc/scancodes.h"
 #include "nvse/GameData.h"
+
+#include "functions/fn_math.h"
+#include "functions/fn_strings.h"
 #include <string>
 
 #define RegisterScriptCommand(name) nvse->RegisterCommand(&kCommandInfo_ ##name); //Default return type (return a number)
@@ -75,79 +78,6 @@ void MessageHandler(NVSEMessagingInterface::Message* msg)
 		break;
 	}
 }
-bool Cmd_DegToRad_Execute(COMMAND_ARGS);
-
-#if RUNTIME
-bool Cmd_DegToRad_Execute(COMMAND_ARGS) {
-	float deg;
-	if (ExtractArgsEx(EXTRACT_ARGS_EX, &deg)) {
-		*result = (deg * 0.0174532925);
-	}
-	return true;
-}
-#endif
-
-bool Cmd_RadToDeg_Execute(COMMAND_ARGS);
-
-#if RUNTIME
-bool Cmd_RadToDeg_Execute(COMMAND_ARGS) {
-	float rad;
-	if (ExtractArgsEx(EXTRACT_ARGS_EX, &rad)) {
-		*result = (rad * 57.2957795131);
-	}
-	return true;
-}
-#endif
-
-bool Cmd_ScancodeToChar_Execute(COMMAND_ARGS);
-
-#if RUNTIME
-bool Cmd_ScancodeToChar_Execute(COMMAND_ARGS) {
-	int key;
-	if (ExtractArgsEx(EXTRACT_ARGS_EX, &key)) {
-		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, ScanCodes[key]);
-		return true;
-	}
-	return true;
-}
-#endif 
-
-bool Cmd_Sv_PadStart_Execute(COMMAND_ARGS);
-
-static ParamInfo kParams_OneString_OneInt_OneString[3] =
-{
-	{	"string",	kParamType_StringVar,	0	},
-	{	"max_length",	kParamType_Integer,	0	},
-	{	"string",	kParamType_String,	0	},
-};
-
-bool Cmd_Sv_PadStart_Execute(COMMAND_ARGS) {
-	UInt32 strID;
-	int maxLength;
-	char padChar;
-	*result = 0;
-	if (ExtractArgsEx(EXTRACT_ARGS_EX, &strID, &maxLength, &padChar)) {
-		const char* srcString = g_stringvarInterface->GetString(strID);
-		if (srcString) {
-			/*if (strlen(srcString) == maxLength) {
-				for (int i = strlen(srcString); i < maxLength; i++) {
-					srcString += padChar;
-				}
-				g_stringvarInterface->Assign(PASS_COMMAND_ARGS, srcString);
-			} */
-			Console_Print("hi");
-			//else { g_stringvarInterface->Assign(PASS_COMMAND_ARGS, srcString); }
-
-		}
-	}
-
-	return true;
-}
-
-DEFINE_COMMAND_PLUGIN(DegToRad, "Converts degrees to radians", 0, 1, kParams_OneFloat)
-DEFINE_COMMAND_PLUGIN(RadToDeg, "Converts radians to degrees", 0, 1, kParams_OneFloat)
-DEFINE_COMMAND_PLUGIN(ScancodeToChar, "Converts a scancode int to string", 0, 1, kParams_OneInt)
-DEFINE_COMMAND_PLUGIN(Sv_PadStart, "Pad a character to the start of a string", 0, 1, kParams_OneString_OneInt_OneString)
 
 bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 {
@@ -156,7 +86,7 @@ bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 	// fill out the info structure
 	info->infoVersion = PluginInfo::kInfoVersion;
 	info->name = "AnhNVSE";
-	info->version = 2;
+	info->version = 1;
 
 	// version checks
 	if (nvse->nvseVersion < PACKED_NVSE_VERSION)

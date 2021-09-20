@@ -10,6 +10,9 @@
     <Filter Include="internal">
       <UniqueIdentifier>{a11bc111-d755-47e5-9d3b-44ef9f61bbb4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="functions">
+      <UniqueIdentifier>{98425e91-c73f-4b5b-95aa-e6fde9c94373}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\nvse\nvse\GameAPI.cpp">
@@ -126,6 +129,12 @@
     </ClInclude>
     <ClInclude Include="misc\scancodes.h">
       <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\fn_math.h">
+      <Filter>functions</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\fn_strings.h">
+      <Filter>functions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
