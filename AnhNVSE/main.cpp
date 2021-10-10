@@ -4,20 +4,9 @@
 #include "nvse/ParamInfos.h"
 #include "nvse/GameObjects.h"
 #include "nvse/GameForms.h"
-#include "misc/scancodes.h"
 #include "nvse/GameData.h"
-
-#include "functions/fn_math.h"
-#include "functions/fn_strings.h"
+#include "misc/scancodes.h"
 #include <string>
-
-#define RegisterScriptCommand(name) nvse->RegisterCommand(&kCommandInfo_ ##name); //Default return type (return a number)
-#define REG_CMD(name) nvse->RegisterCommand(&kCommandInfo_##name);  //Short version of RegisterScriptCommand, from JIP.
-#define REG_TYPED_CMD(name, type) nvse->RegisterTypedCommand(&kCommandInfo_##name,kRetnType_##type);  //from JG
-#define REG_CMD_STR(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_String); //From JIPLN
-#define REG_CMD_ARR(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_Array); //From JIPLN
-#define REG_CMD_FORM(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_Form); //From JIPLN
-#define REG_CMD_AMB(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_Ambiguous); //From JIPLN
 
 IDebugLog		gLog("AnhNVSE.log");
 PluginHandle	g_pluginHandle = kPluginHandle_Invalid;
@@ -32,8 +21,23 @@ const CommandInfo* g_TFC;
 NVSEScriptInterface* g_script;
 #endif
 
+#ifndef RegisterScriptCommand
+#define RegisterScriptCommand(name) nvse->RegisterCommand(&kCommandInfo_ ##name); //Default return type (return a number)
+#define REG_CMD(name) nvse->RegisterCommand(&kCommandInfo_##name);  //Short version of RegisterScriptCommand, from JIP.
+#define REG_TYPED_CMD(name, type) nvse->RegisterTypedCommand(&kCommandInfo_##name,kRetnType_##type);  //from JG
+#define REG_CMD_STR(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_String); //From JIPLN
+#define REG_CMD_ARR(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_Array); //From JIPLN
+#define REG_CMD_FORM(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_Form); //From JIPLN
+#define REG_CMD_AMB(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_Ambiguous); //From JIPLN
+#endif
+
 bool (*ExtractArgsEx)(COMMAND_ARGS_EX, ...);
 bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_EX, UInt32 maxParams, ...);
+
+#include "functions/fn_math.h"
+#include "functions/fn_strings.h"
+#include "functions/fn_quest.h"
+#include "functions/fn_inventory.h"
 
 // This is a message handler for nvse events
 // With this, plugins can listen to messages such as whenever the game loads
@@ -78,6 +82,8 @@ void MessageHandler(NVSEMessagingInterface::Message* msg)
 		break;
 	}
 }
+
+
 
 bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 {
@@ -144,6 +150,20 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	REG_CMD(DegToRad);
 	REG_CMD(RadToDeg);
 	REG_CMD_STR(ScancodeToChar);
-	REG_CMD_STR(Sv_PadStart);
+	//REG_CMD_STR(Sv_PadStart);
+	REG_CMD(GetAngleQuadrant);
+	REG_CMD(GetQuestCompletedAlt);
+	REG_CMD(Sinh);
+	REG_CMD(Cosh);
+	REG_CMD(Tanh);
+	REG_CMD(SetWeaponAnimJamTime);
+	REG_CMD(SetWeaponAnimReloadTime);
+	REG_CMD(SetWeaponAnimShotsPerSec);
+	REG_CMD(SetWeaponFireDelayMin);
+	REG_CMD(SetWeaponFireDelayMax);
+	REG_CMD(SetWeaponRumbleDuration);
+	REG_CMD(SetWeaponRumbleRightMotor);
+	REG_CMD(SetWeaponRumbleLeftMotor);
+	REG_CMD(SetWeaponRumbleWavelength);
 	return true;
 }

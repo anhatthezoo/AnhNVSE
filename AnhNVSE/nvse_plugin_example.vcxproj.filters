@@ -136,6 +136,12 @@
     <ClInclude Include="functions\fn_strings.h">
       <Filter>functions</Filter>
     </ClInclude>
+    <ClInclude Include="functions\fn_quest.h">
+      <Filter>functions</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\fn_inventory.h">
+      <Filter>functions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="exports.def" />
