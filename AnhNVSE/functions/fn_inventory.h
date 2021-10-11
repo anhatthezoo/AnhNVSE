@@ -3,7 +3,7 @@
 #include "GameObjects.h"
 #include "GameProcess.h"
 
-#define DEFINE_SET_INV_FLOAT(name, alt, desc) DEFINE_CMD_ALT(name, alt, desc, 0, 2, kParams_OneFloat_OneOptionalObjectID);
+#define DEFINE_SET_INV_FLOAT(name, alt, desc) DEFINE_COMMAND_PLUGIN(name, desc, 0, 2, kParams_OneFloat_OneOptionalObjectID);
 
 DEFINE_SET_INV_FLOAT(SetWeaponAnimJamTime, SetAnimJamTime, sets the duration fOr weapons jam animation);
 DEFINE_SET_INV_FLOAT(SetWeaponAnimReloadTime, SetAnimReloadTime, sets the duration fOr weapons reload animation);
