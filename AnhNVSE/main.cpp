@@ -83,8 +83,6 @@ void MessageHandler(NVSEMessagingInterface::Message* msg)
 	}
 }
 
-
-
 bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 {
 	_MESSAGE("query");
@@ -146,7 +144,7 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	g_script = (NVSEScriptInterface*)nvse->QueryInterface(kInterface_Script);
 	ExtractArgsEx = g_script->ExtractArgsEx;
 #endif
-	nvse->SetOpcodeBase(0x2000);
+	nvse->SetOpcodeBase(0x3600);
 	REG_CMD(DegToRad);
 	REG_CMD(RadToDeg);
 	REG_CMD_STR(ScancodeToChar);

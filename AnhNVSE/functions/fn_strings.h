@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 static ParamInfo kParams_OneString_OneInt_OneString[3] =
 {
 	{	"string",	kParamType_String,	0	},
@@ -19,7 +21,16 @@ DEFINE_COMMAND_PLUGIN(ScancodeToChar, "Converts a scancode int to string", 0, 1,
 bool Cmd_ScancodeToChar_Execute(COMMAND_ARGS) {
 	int key;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &key)) {
-		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, ScanCodes[key]);
+		const char* tempChar = NULL;                                               //dirty way to do this but lol
+		std::string tempString = NULL;                      
+		tempString = std::to_string(key);
+		for (int i = 0; i < (sizeof(ScanCodes) / sizeof(*ScanCodes)); i++) {	
+			
+			if (strcmp(tempString.c_str(), ScanCodes[i][1]) == 0) {
+				tempChar = ScanCodes[i][0];
+			}
+		}
+		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, tempChar);
 		return true;
 	}
 	return true;
