@@ -12,7 +12,7 @@ static ParamInfo kParams_OneString_OneInt_OneString[3] =
 DEFINE_COMMAND_PLUGIN(ScancodeToChar, "Converts a scancode int to string", 0, 1, kParams_OneInt)
 //DEFINE_COMMAND_PLUGIN(Sv_PadStart, "Pad a character to the start of a string", 0, 3, kParams_OneString_OneInt_OneString)
 
-#if RUNTIME
+//#if RUNTIME
 /*bool Cmd_Sv_PadStart_Execute(COMMAND_ARGS) {
 	
 	return true;
@@ -36,5 +36,5 @@ bool Cmd_ScancodeToChar_Execute(COMMAND_ARGS) {
 	}
 	return true;
 }
-#endif
+//#endif
 

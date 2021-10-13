@@ -41,7 +41,7 @@ bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_
 
 // This is a message handler for nvse events
 // With this, plugins can listen to messages such as whenever the game loads
-void MessageHandler(NVSEMessagingInterface::Message* msg)
+/*void MessageHandler(NVSEMessagingInterface::Message* msg)
 {
 	switch (msg->type)
 	{
@@ -81,7 +81,7 @@ void MessageHandler(NVSEMessagingInterface::Message* msg)
 	default:
 		break;
 	}
-}
+} */
 
 bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 {
@@ -134,8 +134,8 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 
 	g_nvseInterface = (NVSEInterface*)nvse;
 
-	g_messagingInterface = (NVSEMessagingInterface*)nvse->QueryInterface(kInterface_Messaging);
-	g_messagingInterface->RegisterListener(g_pluginHandle, "NVSE", MessageHandler);
+	//g_messagingInterface = (NVSEMessagingInterface*)nvse->QueryInterface(kInterface_Messaging);
+	//g_messagingInterface->RegisterListener(g_pluginHandle, "NVSE", MessageHandler);
 
 	g_stringvarInterface = (NVSEStringVarInterface*)nvse->QueryInterface(kInterface_StringVar);
 	ExtractFormatStringArgs = g_script->ExtractFormatStringArgs;
