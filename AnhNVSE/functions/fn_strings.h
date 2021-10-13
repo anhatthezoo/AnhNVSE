@@ -19,10 +19,11 @@ DEFINE_COMMAND_PLUGIN(ScancodeToChar, "Converts a scancode int to string", 0, 1,
 } */
 
 bool Cmd_ScancodeToChar_Execute(COMMAND_ARGS) {
+	*result = 0;
 	int key;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &key)) {
-		const char* tempChar = NULL;                                               //dirty way to do this but lol
-		std::string tempString = NULL;                      
+		const char* tempChar;                                               //dirty way to do this but lol
+		std::string tempString;                      
 		tempString = std::to_string(key);
 		for (int i = 0; i < (sizeof(ScanCodes) / sizeof(*ScanCodes)); i++) {	
 			

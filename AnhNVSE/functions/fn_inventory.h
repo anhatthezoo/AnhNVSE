@@ -3,17 +3,17 @@
 #include "GameObjects.h"
 #include "GameProcess.h"
 
-#define DEFINE_SET_INV_FLOAT(name, alt, desc) DEFINE_COMMAND_PLUGIN(name, desc, 0, 2, kParams_OneFloat_OneOptionalObjectID);
+#define DEFINE_SET_INV_FLOAT(name, desc) DEFINE_COMMAND_PLUGIN(name, desc, 0, 2, kParams_OneFloat_OneOptionalObjectID);
 
-DEFINE_SET_INV_FLOAT(SetWeaponAnimJamTime, SetAnimJamTime, sets the duration fOr weapons jam animation);
-DEFINE_SET_INV_FLOAT(SetWeaponAnimReloadTime, SetAnimReloadTime, sets the duration fOr weapons reload animation);
-DEFINE_SET_INV_FLOAT(SetWeaponAnimShotsPerSec, SetAnimSPS, sets animshotspersec);
-DEFINE_SET_INV_FLOAT(SetWeaponFireDelayMin, SetFireDelayMin, sets firedelaymin);
-DEFINE_SET_INV_FLOAT(SetWeaponFireDelayMax, SetFireDelayMax, sets firedelaymax);
-DEFINE_SET_INV_FLOAT(SetWeaponRumbleDuration, SetRumbleLength, sets rumble duration);
-DEFINE_SET_INV_FLOAT(SetWeaponRumbleRightMotor, SetRumbleRMotr, sets right motor strength);
-DEFINE_SET_INV_FLOAT(SetWeaponRumbleLeftMotor, SetRumbleLMotr, sets left motor strength);
-DEFINE_SET_INV_FLOAT(SetWeaponRumbleWavelength, SetRumbleWavelength, sets rumble wavelength);
+DEFINE_SET_INV_FLOAT(SetWeaponAnimJamTime, sets the duration fOr weapons jam animation);
+DEFINE_SET_INV_FLOAT(SetWeaponAnimReloadTime, sets the duration fOr weapons reload animation);
+DEFINE_SET_INV_FLOAT(SetWeaponAnimShotsPerSec, sets animshotspersec);
+DEFINE_SET_INV_FLOAT(SetWeaponFireDelayMin, sets firedelaymin);
+DEFINE_SET_INV_FLOAT(SetWeaponFireDelayMax, sets firedelaymax);
+DEFINE_SET_INV_FLOAT(SetWeaponRumbleDuration, sets rumble duration);
+DEFINE_SET_INV_FLOAT(SetWeaponRumbleRightMotor, sets right motor strength);
+DEFINE_SET_INV_FLOAT(SetWeaponRumbleLeftMotor, sets left motor strength);
+DEFINE_SET_INV_FLOAT(SetWeaponRumbleWavelength, sets rumble wavelength);
 
 TESForm* Extract_FloatAndForm(COMMAND_ARGS, float& floatVal)
 {
@@ -38,6 +38,7 @@ TESObjectWEAP* Extract_FloatAndWeapon(COMMAND_ARGS, float& floatVal) {
 	return pWeapon;
 }
 
+#if RUNTIME
 bool Cmd_SetWeaponAnimJamTime_Execute(COMMAND_ARGS)
 {
 	*result = 0;
@@ -136,3 +137,5 @@ bool Cmd_SetWeaponRumbleWavelength_Execute(COMMAND_ARGS)
 	}
 	return true;
 }
+
+#endif

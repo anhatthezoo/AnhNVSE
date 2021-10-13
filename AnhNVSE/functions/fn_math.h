@@ -37,6 +37,7 @@ bool Cmd_GetAngleQuadrant_Execute(COMMAND_ARGS) {
 		tempAngle %= 360;
 		if (tempAngle < 0) tempAngle += 360;
 		*result = (tempAngle / 90) % 4 + 1;
+		return true;
 	}
 	return true;
 }
@@ -47,7 +48,7 @@ bool Cmd_Sinh_Execute(COMMAND_ARGS) {
 		*result = sinh(angle);
 		return true;
 	}
-	else *result = 0;
+	return true;
 }
 
 bool Cmd_Cosh_Execute(COMMAND_ARGS) {
@@ -56,7 +57,7 @@ bool Cmd_Cosh_Execute(COMMAND_ARGS) {
 		*result = cosh(angle);
 		return true;
 	}
-	else *result = 0;
+	return true;
 }
 
 bool Cmd_Tanh_Execute(COMMAND_ARGS) {
@@ -65,7 +66,7 @@ bool Cmd_Tanh_Execute(COMMAND_ARGS) {
 		*result = tanh(angle);
 		return true;
 	}
-	else *result = 0;
+	return true;
 }
 
 #endif 
