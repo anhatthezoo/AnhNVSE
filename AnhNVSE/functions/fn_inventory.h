@@ -38,7 +38,7 @@ TESObjectWEAP* Extract_FloatAndWeapon(COMMAND_ARGS, float& floatVal) {
 	return pWeapon;
 }
 
-//#if RUNTIME
+#if RUNTIME
 bool Cmd_SetWeaponAnimJamTime_Execute(COMMAND_ARGS)
 {
 	*result = 0;
@@ -138,4 +138,4 @@ bool Cmd_SetWeaponRumbleWavelength_Execute(COMMAND_ARGS)
 	return true;
 }
 
-//#endif
+#endif

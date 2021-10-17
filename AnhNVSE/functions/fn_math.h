@@ -13,7 +13,7 @@ DEFINE_COMMAND_PLUGIN(Sinh, "Hyperbolic sin of angle", 0, 1, kParams_OneDouble)
 DEFINE_COMMAND_PLUGIN(Cosh, "Hyperbolic cos of angle", 0, 1, kParams_OneDouble)
 DEFINE_COMMAND_PLUGIN(Tanh, "Hyperbolic tan of angle", 0, 1, kParams_OneDouble)
 
-//#if RUNTIME
+#if RUNTIME
 bool Cmd_RadToDeg_Execute(COMMAND_ARGS) {
 	float rad;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &rad)) {
@@ -69,6 +69,6 @@ bool Cmd_Tanh_Execute(COMMAND_ARGS) {
 	return true;
 }
 
-//#endif 
+#endif 
 
 

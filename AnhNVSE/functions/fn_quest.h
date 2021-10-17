@@ -3,7 +3,7 @@
 DEFINE_CMD_COND_PLUGIN(GetQuestCompletedAlt, "", 0, kParams_OneQuest)
 
 
-//#if RUNTIME
+#if RUNTIME
 bool Cmd_GetQuestCompletedAlt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	TESQuest* quest;
@@ -31,4 +31,4 @@ bool Cmd_GetQuestCompletedAlt_Eval(COMMAND_ARGS_EVAL) {
 	}
 	return true;
 }
-//#endif
+#endif
