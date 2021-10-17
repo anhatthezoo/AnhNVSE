@@ -130,22 +130,25 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 {
 	_MESSAGE("load");
 
-	g_pluginHandle = nvse->GetPluginHandle();
 
-	g_nvseInterface = (NVSEInterface*)nvse;
+	if (!nvse->isEditor)
+	{
+		g_pluginHandle = nvse->GetPluginHandle();
 
-	//g_messagingInterface = (NVSEMessagingInterface*)nvse->QueryInterface(kInterface_Messaging);
-	//g_messagingInterface->RegisterListener(g_pluginHandle, "NVSE", MessageHandler);
+		g_nvseInterface = (NVSEInterface*)nvse;
 
-	g_stringvarInterface = (NVSEStringVarInterface*)nvse->QueryInterface(kInterface_StringVar);
-	ExtractFormatStringArgs = g_script->ExtractFormatStringArgs;
+		//g_messagingInterface = (NVSEMessagingInterface*)nvse->QueryInterface(kInterface_Messaging);
+		//g_messagingInterface->RegisterListener(g_pluginHandle, "NVSE", MessageHandler);
 
-#if RUNTIME
-	g_script = (NVSEScriptInterface*)nvse->QueryInterface(kInterface_Script);
-	ExtractArgsEx = g_script->ExtractArgsEx;
-#endif
+		g_stringvarInterface = (NVSEStringVarInterface*)nvse->QueryInterface(kInterface_StringVar);
+		ExtractFormatStringArgs = g_script->ExtractFormatStringArgs;
+
+		g_script = (NVSEScriptInterface*)nvse->QueryInterface(kInterface_Script);
+		ExtractArgsEx = g_script->ExtractArgsEx;
+	}
+	
 	nvse->SetOpcodeBase(0x3600);
-	REG_CMD(DegToRad);
+	REG_CMD(DegToRad); 
 	REG_CMD(RadToDeg);
 	REG_CMD_STR(ScancodeToChar);
 	//REG_CMD_STR(Sv_PadStart);
