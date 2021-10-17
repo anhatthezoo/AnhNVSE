@@ -13,6 +13,7 @@ PluginHandle	g_pluginHandle = kPluginHandle_Invalid;
 
 NVSEMessagingInterface* g_messagingInterface;
 NVSEStringVarInterface* g_stringvarInterface;
+NVSEArrayVarInterface* g_arrInterface;
 NVSEInterface* g_nvseInterface;
 NVSECommandTableInterface* g_cmdTable;
 const CommandInfo* g_TFC;
@@ -38,6 +39,7 @@ bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_
 #include "functions/fn_strings.h"
 #include "functions/fn_quest.h"
 #include "functions/fn_inventory.h"
+#include "functions/fn_arrays.h"
 
 // This is a message handler for nvse events
 // With this, plugins can listen to messages such as whenever the game loads
@@ -138,6 +140,7 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	//g_messagingInterface->RegisterListener(g_pluginHandle, "NVSE", MessageHandler);
 
 	g_stringvarInterface = (NVSEStringVarInterface*)nvse->QueryInterface(kInterface_StringVar);
+	g_arrInterface = (NVSEArrayVarInterface*)nvse->QueryInterface(kInterface_ArrayVar);
 	ExtractFormatStringArgs = g_script->ExtractFormatStringArgs;
 
 #if RUNTIME
@@ -163,5 +166,7 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	REG_CMD(SetWeaponRumbleRightMotor);
 	REG_CMD(SetWeaponRumbleLeftMotor);
 	REG_CMD(SetWeaponRumbleWavelength);
+
+	REG_CMD(V3_Normalized_Alt);
 	return true;
 }

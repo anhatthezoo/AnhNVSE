@@ -368,6 +368,7 @@
     <ClInclude Include="..\nvse\nvse\SafeWrite.h" />
     <ClInclude Include="..\nvse\nvse\Utilities.h" />
     <ClInclude Include="..\nvse\nvse\utility.h" />
+    <ClInclude Include="functions\fn_arrays.h" />
     <ClInclude Include="functions\fn_inventory.h" />
     <ClInclude Include="functions\fn_math.h" />
     <ClInclude Include="functions\fn_quest.h" />
