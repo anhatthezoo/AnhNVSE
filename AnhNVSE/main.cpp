@@ -92,7 +92,7 @@ bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 	// fill out the info structure
 	info->infoVersion = PluginInfo::kInfoVersion;
 	info->name = "AnhNVSE";
-	info->version = 1;
+	info->version = 102;
 
 	// version checks
 	if (nvse->nvseVersion < PACKED_NVSE_VERSION)
@@ -150,25 +150,34 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	}
 	
 	nvse->SetOpcodeBase(0x3600);
-	REG_CMD(DegToRad); 
-	REG_CMD(RadToDeg);
-	REG_CMD_STR(ScancodeToChar);
-	//REG_CMD_STR(Sv_PadStart);
-	REG_CMD(GetAngleQuadrant);
-	REG_CMD(GetQuestCompletedAlt);
-	REG_CMD(Sinh);
-	REG_CMD(Cosh);
-	REG_CMD(Tanh);
-	REG_CMD(SetWeaponAnimJamTime);
-	REG_CMD(SetWeaponAnimReloadTime);
-	REG_CMD(SetWeaponAnimShotsPerSec);
-	REG_CMD(SetWeaponFireDelayMin);
-	REG_CMD(SetWeaponFireDelayMax);
-	REG_CMD(SetWeaponRumbleDuration);
-	REG_CMD(SetWeaponRumbleRightMotor);
-	REG_CMD(SetWeaponRumbleLeftMotor);
-	REG_CMD(SetWeaponRumbleWavelength);
+	// ===== v.1.0.0 =====
 
-	REG_CMD(V3_Normalized_Alt);
+	/*3600*/ REG_CMD(DegToRad);
+	/*3601*/ REG_CMD(RadToDeg);
+	/*3602*/ REG_CMD_STR(ScancodeToChar);
+	/*3603*/ REG_CMD(GetAngleQuadrant);
+	/*3604*/ REG_CMD(GetQuestCompletedAlt);
+	/*3605*/ REG_CMD(Sinh);
+	/*3606*/ REG_CMD(Cosh);
+	/*3607*/ REG_CMD(Tanh);
+	/*3608*/ REG_CMD(SetWeaponAnimJamTime);
+	/*3609*/ REG_CMD(SetWeaponAnimReloadTime);
+	/*360A*/ REG_CMD(SetWeaponAnimShotsPerSec);
+	/*360B*/ REG_CMD(SetWeaponFireDelayMin);
+	/*360C*/ REG_CMD(SetWeaponFireDelayMax);
+	/*360D*/ REG_CMD(SetWeaponRumbleDuration);
+	/*360E*/ REG_CMD(SetWeaponRumbleRightMotor);
+	/*360F*/ REG_CMD(SetWeaponRumbleLeftMotor);
+	/*3610*/ REG_CMD(SetWeaponRumbleWavelength);
+
+	// ===== v1.1.0 =====
+
+	/*3611*/ REG_CMD_ARR(V3Normalize_Alt);
+	/*3612*/ REG_CMD_ARR(V3Crossproduct_Alt);
+	/*3613*/ REG_CMD_ARR(QMultQuatQuat_Alt);
+	/*3614*/ REG_CMD_ARR(QMultQuatVector3_Alt);
+	/*3615*/ REG_CMD_ARR(QNormalize_Alt);
+	/*3616*/ REG_CMD_ARR(QFromAxisAngle_Alt);
+	/*3617*/ REG_CMD_ARR(QInterpolate_Alt);
 	return true;
 }
