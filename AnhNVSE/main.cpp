@@ -179,5 +179,6 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	/*3615*/ REG_CMD_ARR(QNormalize_Alt);
 	/*3616*/ REG_CMD_ARR(QFromAxisAngle_Alt);
 	/*3617*/ REG_CMD_ARR(QInterpolate_Alt);
+	/*3618*/ REG_CMD(V3Dotproduct);
 	return true;
 }
