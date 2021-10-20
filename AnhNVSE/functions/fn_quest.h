@@ -1,6 +1,6 @@
 #pragma once
 
-DEFINE_CMD_COND_PLUGIN(GetQuestCompletedAlt, "", 0, kParams_OneQuest)
+DEFINE_CMD_ALT_COND_PLUGIN(GetQuestCompletedAlt, GetQuestSucceeded, "", false, kParams_OneQuest)
 
 
 #if RUNTIME
