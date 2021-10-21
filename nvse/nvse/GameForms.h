@@ -3697,6 +3697,12 @@ public:
 		VariableInfo		*varInfoIndex;
 	};
 
+	enum questFlags : UInt8
+	{
+		kQuestCompleted = 1 << 1,
+		kQuestFailed = 1 << 6,
+	};
+
 	UInt8						flags;						// 03C	bit0 is startGameEnabled/isRunning
 	UInt8						priority;					// 03D
 	UInt8						pad03E[2];					// 03E
@@ -3709,6 +3715,14 @@ public:
 	UInt8						currentStage;				// 060
 	UInt8						pad061[3];					// 061
 	String						editorName;					// 064
+
+	
+
+	// Failure or success
+	[[nodiscard]] bool IsQuestCompleted() const { return (flags & kQuestCompleted); }
+	
+	[[nodiscard]] bool IsQuestFailed() const { return (flags & kQuestFailed); }
+	[[nodiscard]] bool IsQuestSuccessful() const { return IsQuestCompleted() && !IsQuestFailed(); }
 };
 
 STATIC_ASSERT(offsetof(TESQuest, flags) == 0x03C);
