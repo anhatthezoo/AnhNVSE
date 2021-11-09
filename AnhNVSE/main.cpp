@@ -172,13 +172,16 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 
 	// ===== v1.1.0 =====
 
-	/*3611*/ REG_CMD_ARR(V3Normalize_Alt);
-	/*3612*/ REG_CMD_ARR(V3Crossproduct_Alt);
-	/*3613*/ REG_CMD_ARR(QMultQuatQuat_Alt);
-	/*3614*/ REG_CMD_ARR(QMultQuatVector3_Alt);
-	/*3615*/ REG_CMD_ARR(QNormalize_Alt);
-	/*3616*/ REG_CMD_ARR(QFromAxisAngle_Alt);
-	/*3617*/ REG_CMD_ARR(QInterpolate_Alt);
+	/*3611*/ REG_CMD_ARR(V3NormalizeAlt);
+	/*3612*/ REG_CMD_ARR(V3CrossproductAlt);
+	/*3613*/ REG_CMD_ARR(QMultQuatQuatAlt);
+	/*3614*/ REG_CMD_ARR(QMultQuatVector3Alt);
+	/*3615*/ REG_CMD_ARR(QNormalizeAlt);
+	/*3616*/ REG_CMD_ARR(QFromAxisAngleAlt);
+	/*3617*/ REG_CMD_ARR(QInterpolateAlt);
 	/*3618*/ REG_CMD(V3Dotproduct);
+	/*3619*/ REG_CMD(GetArmorARAlt);
+	/*361A*/ REG_CMD(SetArmorARAlt);
+	/*361B*/ REG_CMD_STR(Sv_PadStart);
 	return true;
 }

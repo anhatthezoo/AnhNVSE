@@ -122,17 +122,17 @@ float VDotproduct(Vector3 v1, Vector3 v2)
 }
 //snig
 
-DEFINE_COMMAND_PLUGIN(V3Normalize_Alt, "", 0, 1, kParams_OneArray);
-DEFINE_COMMAND_PLUGIN(V3Crossproduct_Alt, "", 0, 2, kParams_TwoArrays);
-DEFINE_COMMAND_PLUGIN(QMultQuatQuat_Alt, "", 0, 2, kParams_TwoArrays);
-DEFINE_COMMAND_PLUGIN(QMultQuatVector3_Alt, "", 0, 2, kParams_TwoArrays);
-DEFINE_COMMAND_PLUGIN(QNormalize_Alt, "", 0, 1, kParams_OneArray);
-DEFINE_COMMAND_PLUGIN(QFromAxisAngle_Alt, "", 0, 2, kParams_OneArray_OneFloat);
-DEFINE_COMMAND_PLUGIN(QInterpolate_Alt, "", 0, 4, kParams_TwoArrays_OneFloat_OneInt);
+DEFINE_COMMAND_PLUGIN(V3NormalizeAlt, "", 0, 1, kParams_OneArray);
+DEFINE_COMMAND_PLUGIN(V3CrossproductAlt, "", 0, 2, kParams_TwoArrays);
+DEFINE_COMMAND_PLUGIN(QMultQuatQuatAlt, "", 0, 2, kParams_TwoArrays);
+DEFINE_COMMAND_PLUGIN(QMultQuatVector3Alt, "", 0, 2, kParams_TwoArrays);
+DEFINE_COMMAND_PLUGIN(QNormalizeAlt, "", 0, 1, kParams_OneArray);
+DEFINE_COMMAND_PLUGIN(QFromAxisAngleAlt, "", 0, 2, kParams_OneArray_OneFloat);
+DEFINE_COMMAND_PLUGIN(QInterpolateAlt, "", 0, 4, kParams_TwoArrays_OneFloat_OneInt);
 DEFINE_COMMAND_PLUGIN(V3Dotproduct, "", 0, 2, kParams_TwoArrays);
 
 #if RUNTIME
-bool Cmd_V3Normalize_Alt_Execute(COMMAND_ARGS){
+bool Cmd_V3NormalizeAlt_Execute(COMMAND_ARGS){
 	*result = 0;
 	UInt32 arrID;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &arrID)) {
@@ -154,7 +154,7 @@ bool Cmd_V3Normalize_Alt_Execute(COMMAND_ARGS){
 	return true;
 }
 
-bool Cmd_V3Crossproduct_Alt_Execute(COMMAND_ARGS) {
+bool Cmd_V3CrossproductAlt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	UInt32 srcID1, srcID2;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &srcID1, &srcID2)) {
@@ -180,7 +180,7 @@ bool Cmd_V3Crossproduct_Alt_Execute(COMMAND_ARGS) {
 	return true;
 }
 
-bool Cmd_QMultQuatQuat_Alt_Execute(COMMAND_ARGS) {
+bool Cmd_QMultQuatQuatAlt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	UInt32 srcID1, srcID2;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &srcID1, &srcID2)) {
@@ -206,7 +206,7 @@ bool Cmd_QMultQuatQuat_Alt_Execute(COMMAND_ARGS) {
 	return true;
 }
 
-bool Cmd_QMultQuatVector3_Alt_Execute(COMMAND_ARGS) {
+bool Cmd_QMultQuatVector3Alt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	UInt32 srcID1, srcID2;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &srcID1, &srcID2)) {
@@ -232,7 +232,7 @@ bool Cmd_QMultQuatVector3_Alt_Execute(COMMAND_ARGS) {
 	return true;
 }
 
-bool Cmd_QNormalize_Alt_Execute(COMMAND_ARGS) {
+bool Cmd_QNormalizeAlt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	UInt32 srcID;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &srcID)) {
@@ -254,7 +254,7 @@ bool Cmd_QNormalize_Alt_Execute(COMMAND_ARGS) {
 	return true;
 }
 
-bool Cmd_QFromAxisAngle_Alt_Execute(COMMAND_ARGS) {
+bool Cmd_QFromAxisAngleAlt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	UInt32 srcID;
 	float angle;
@@ -277,7 +277,7 @@ bool Cmd_QFromAxisAngle_Alt_Execute(COMMAND_ARGS) {
 	return true;
 }
 
-bool Cmd_QInterpolate_Alt_Execute(COMMAND_ARGS) {
+bool Cmd_QInterpolateAlt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	UInt32 srcID1, srcID2;
 	float t;
