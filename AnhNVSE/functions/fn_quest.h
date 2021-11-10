@@ -1,33 +1,25 @@
 #pragma once
 
-DEFINE_CMD_COND_PLUGIN(GetQuestCompletedAlt, "", 0, kParams_OneQuest)
+DEFINE_CMD_ALT_COND_PLUGIN(GetQuestCompletedAlt, GetQuestSucceeded, "", false, kParams_OneQuest)
 
 
 #if RUNTIME
+
 bool Cmd_GetQuestCompletedAlt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	TESQuest* quest;
-
-	if (ExtractArgsEx(EXTRACT_ARGS_EX, &quest))
+	if (ExtractArgsEx(EXTRACT_ARGS_EX, &quest) && quest)
 	{
-		bool const bQuestFailed = (quest->flags & 0x40);
-		bool const bQuestCompleted = (quest->flags * 0x2);
-
-		*result = bQuestCompleted && !bQuestFailed;
+		*result = quest->IsQuestSuccessful();
 	}
 	return true;
 };
 
 bool Cmd_GetQuestCompletedAlt_Eval(COMMAND_ARGS_EVAL) {
 	*result = 0;
-	TESQuest* quest = (TESQuest*)arg1;
-
-	if (quest)
+	if (auto const quest = (TESQuest*)arg1)
 	{
-		bool const bQuestFailed = (quest->flags & 0x40);
-		bool const bQuestCompleted = (quest->flags * 0x2);
-
-		*result = bQuestCompleted && !bQuestFailed;
+		*result = quest->IsQuestSuccessful();
 	}
 	return true;
 }
