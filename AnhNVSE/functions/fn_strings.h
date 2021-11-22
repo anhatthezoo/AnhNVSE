@@ -23,10 +23,11 @@ bool Cmd_Sv_PadStart_Execute(COMMAND_ARGS) {
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &srcString1, &targetLen, &srcString2)) {
 		std::string src1 = std::string(srcString1);
 		std::string src2 = std::string(srcString2);
-		
+		std::string tempStr;
 		for (int i = src1.length(); i < targetLen; i++) {
-			src1.insert(0, src2);
+			tempStr.insert(0, src2);
 		}
+		src1.insert(0, tempStr.substr(0, (targetLen - src1.length())));
 		strcpy(newChar, src1.c_str());
 		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, newChar);
 		return true;
@@ -44,10 +45,11 @@ bool Cmd_Sv_PadEnd_Execute(COMMAND_ARGS) {
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &srcString1, &targetLen, &srcString2)) {
 		std::string src1 = std::string(srcString1);
 		std::string src2 = std::string(srcString2);
-
+		std::string tempStr;
 		for (int i = src1.length(); i < targetLen; i++) {
-			src1.append(src2);
+			tempStr.append(src2);
 		}
+		src1.append(tempStr.substr(0, (targetLen - src1.length())));
 		strcpy(newChar, src1.c_str());
 		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, newChar);
 		return true;

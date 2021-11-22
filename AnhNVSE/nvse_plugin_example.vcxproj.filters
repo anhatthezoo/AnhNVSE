@@ -71,6 +71,9 @@
     <ClCompile Include="..\nvse\nvse\printf.cpp">
       <Filter>nvse</Filter>
     </ClCompile>
+    <ClCompile Include="internal\netimmerse.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\nvse\nvse\GameAPI.h">
@@ -143,6 +146,12 @@
       <Filter>functions</Filter>
     </ClInclude>
     <ClInclude Include="functions\fn_arrays.h">
+      <Filter>functions</Filter>
+    </ClInclude>
+    <ClInclude Include="internal\netimmerse.h">
+      <Filter>internal</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\fn_miscref.h">
       <Filter>functions</Filter>
     </ClInclude>
   </ItemGroup>

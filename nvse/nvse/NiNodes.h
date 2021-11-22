@@ -452,7 +452,7 @@ class ActiveEffect;
 
 // member fn addresses
 #if RUNTIME
-	const UInt32 kNiObjectNET_GetExtraData = 0x006FF9C0;
+const UInt32 kNiObjectNET_GetExtraData = 0x006FF9C0;
 #endif
 
 struct NiMemObject
@@ -480,8 +480,9 @@ public:
 	NiObject();
 	~NiObject();
 
-	virtual NiRTTI *	GetType(void);		// 02
-	virtual NiNode *	GetAsNiNode(void);	// 03 
+	virtual NiRTTI* GetType(void);		// 02
+	virtual NiNode* GetAsNiNode(void);	// 03 
+	virtual NiGeometry* GetNiGeometry();	// Returns this
 	virtual UInt32		Unk_04(void);		// 04
 	virtual UInt32		Unk_05(void);		// 05
 	virtual UInt32		Unk_06(void);		// 06
@@ -496,14 +497,14 @@ public:
 	virtual UInt32		Unk_0F(void);		// 0F
 	virtual UInt32		Unk_10(void);		// 10
 	virtual UInt32		Unk_11(void);		// 11
-	virtual NiObject *	Copy(void);			// 12 (returns this, GetAsNiObject ?). Big doubt with everything below, except last which is 022
-	virtual void		Load(NiStream * stream);
-	virtual void		PostLoad(NiStream * stream);
-	virtual void		FindNodes(NiStream * stream);	// give NiStream all of the NiNodes we own
-	virtual void		Save(NiStream * stream);
-	virtual bool		Compare(NiObject * obj);
-	virtual void		DumpAttributes(NiTArray <char *> * dst);
-	virtual void		DumpChildAttributes(NiTArray <char *> * dst);
+	virtual NiObject* Copy(void);			// 12 (returns this, GetAsNiObject ?). Big doubt with everything below, except last which is 022
+	virtual void		Load(NiStream* stream);
+	virtual void		PostLoad(NiStream* stream);
+	virtual void		FindNodes(NiStream* stream);	// give NiStream all of the NiNodes we own
+	virtual void		Save(NiStream* stream);
+	virtual bool		Compare(NiObject* obj);
+	virtual void		DumpAttributes(NiTArray <char*>* dst);
+	virtual void		DumpChildAttributes(NiTArray <char*>* dst);
 	virtual void		Unk_1A(void);
 	virtual void		Unk_1B(UInt32 arg);
 	virtual void		Unk_1C(void);
@@ -517,7 +518,7 @@ public:
 
 class RefNiObject
 {
-	NiObject*	object;	// 00
+	NiObject* object;	// 00
 };
 
 // 018 (used to be 100, delta E8) confirmed, confirmed no virtual funcs
@@ -532,11 +533,11 @@ public:
 	DEFINE_MEMBER_FN(GetExtraData, NiExtraData*, kNiObjectNET_GetExtraData, const char* name);
 #endif
 
-	const char			* m_pcName;						// 008 - name known
-	NiTimeController	* m_controller;					// 00C - size ok
+	const char* m_pcName;						// 008 - name known
+	NiTimeController* m_controller;					// 00C - size ok
 
 	// doesn't appear to be part of a class?
-	NiExtraData			** m_extraDataList;				// 010 - size ok
+	NiExtraData** m_extraDataList;				// 010 - size ok
 	UInt16				m_extraDataListLen;				// 014 - size ok
 	UInt16				m_extraDataListCapacity;		// 016 - size ok
 	// 018
@@ -600,9 +601,9 @@ public:
 	UInt32			pixelLayout;	// 018
 	UInt32			alphaFormat;	// 01C
 	UInt32			mipmapFormat;	// 020
-	RendererData	* rendererData;	// 024
-	NiTexture		* nextTex;		// 028 - linked list updated in ctor/dtor
-	NiTexture		* prevTex;		// 02C
+	RendererData* rendererData;	// 024
+	NiTexture* nextTex;		// 028 - linked list updated in ctor/dtor
+	NiTexture* prevTex;		// 02C
 };
 
 // NiDX9Direct3DTexture - not referenced
@@ -620,13 +621,13 @@ public:
 
 	UInt8		unk030;				// 030 - is static?
 	UInt8		unk031[3];			// 031
-	void		* unk034;			// 034
-	const char	* fileName;			// 038
-	NiObject	* pixelData;		// 03C - NiPixelData
+	void* unk034;			// 034
+	const char* fileName;			// 038
+	NiObject* pixelData;		// 03C - NiPixelData
 	UInt8		loadDirectToRender;	// 040
 	UInt8		persistRenderData;	// 041
 	UInt8		pad042[2];			// 042
-	void		* unk044;			// 044
+	void* unk044;			// 044
 };
 
 // 04C
@@ -654,9 +655,9 @@ public:
 		UInt32	height;
 	};
 
-	virtual Str030 *	Unk_15(void);
+	virtual Str030* Unk_15(void);
 
-	Str030	* unk030;	// 030
+	Str030* unk030;	// 030
 	UInt32	pad034;		// 034
 	UInt32	pad038;		// 038
 	UInt32	pad03C;		// 03C
@@ -670,7 +671,7 @@ public:
 	~NiRenderedCubeMap();
 
 	UInt32		unk040;		// 040
-	NiObject	* faces[6];	// 044
+	NiObject* faces[6];	// 044
 };
 
 // 018
@@ -829,11 +830,11 @@ public:
 	// total size = face size * numFaces
 
 	TextureFormat	format;		// 008
-	NiRefObject		* unk04C;	// 04C
+	NiRefObject* unk04C;	// 04C
 	UInt32	unk050;			// 050
-	UInt32	* width;		// 054 - array for mipmaps?
-	UInt32	* height;		// 058
-	UInt32	* unk05C;		// 05C - sizes?
+	UInt32* width;		// 054 - array for mipmaps?
+	UInt32* height;		// 058
+	UInt32* unk05C;		// 05C - sizes?
 	UInt32	mipmapLevels;	// 060
 	UInt32	unk064;			// 064
 	UInt32	unk068;			// 068
@@ -868,8 +869,8 @@ public:
 	// 10
 	struct Unk014
 	{
-		NiRefObject	* unk00;	// 00
-		NiRefObject	* unk04;	// 04
+		NiRefObject* unk00;	// 00
+		NiRefObject* unk04;	// 04
 		UInt32		unk08;		// 08
 		UInt8		unk0C;		// 0C
 		UInt8		unk0D;		// 0D
@@ -879,7 +880,7 @@ public:
 	// 10
 	struct Unk018
 	{
-		NiRefObject	* unk00;	// 00
+		NiRefObject* unk00;	// 00
 		UInt16		unk04;		// 04
 		UInt16		unk06;		// 06
 		UInt16		unk08;		// 08
@@ -888,13 +889,13 @@ public:
 		UInt8		pad0E[2];	// 0E
 	};
 
-	char				* filePath;		// 008
+	char* filePath;		// 008
 	UInt32				arraySize;		// 00C
 	UInt32				unk010;			// 010
-	Unk014				* unk014;		// 014
-	Unk018				* unk018;		// 018
+	Unk014* unk014;		// 014
+	Unk018* unk018;		// 018
 	float				weight;			// 01C
-	NiTextKeyExtraData	* unk020;		// 020
+	NiTextKeyExtraData* unk020;		// 020
 	UInt32				cycleType;		// 024
 	float				freq;			// 028
 	float				begin;			// 02C
@@ -902,16 +903,16 @@ public:
 	float				last;			// 034
 	float				weightLast;		// 038
 	float				lastScaled;		// 03C
-	NiControllerManager * controllerMgr;	// 040
+	NiControllerManager* controllerMgr;	// 040
 	UInt32				state;			// 044
 	float				offset;			// 048
 	float				start;			// 04C - offset * -1?
 	float				end2;			// 050
 	UInt32				unk054;			// 054
 	UInt32				unk058;			// 058
-	char				* accumRoot;	// 05C - bone? (seen "Bip01")
-	NiNode				* niNode060;	// 060
-	NiStringPalette		* unk064;		// 064
+	char* accumRoot;	// 05C - bone? (seen "Bip01")
+	NiNode* niNode060;	// 060
+	NiStringPalette* unk064;		// 064
 };
 
 // 06C
@@ -921,7 +922,7 @@ public:
 	BSAnimGroupSequence();
 	~BSAnimGroupSequence();
 
-	TESAnimGroup		* animGroup;	//068
+	TESAnimGroup* animGroup;	//068
 };
 
 class NiNode;
@@ -936,8 +937,8 @@ public:
 
 	virtual void Destructor(bool arg0);
 
-	enum{
-		kAnimGroup_Idle					= 0x0,
+	enum {
+		kAnimGroup_Idle = 0x0,
 		kAnimGroup_DynamicIdle,
 		kAnimGroup_SpecialIdle,
 		kAnimGroup_Forward,
@@ -1188,7 +1189,7 @@ public:
 
 	// 24
 	struct AnimGroupInfo {
-		const char	* name;				// 00
+		const char* name;				// 00
 		UInt8		sequenceType;		// 04
 		UInt8		pad[3];
 		UInt32		unk08[7];			// 08
@@ -1201,7 +1202,7 @@ public:
 	UInt8		unk009;			//009 does what?
 	UInt16		unk00A;
 	UInt32		numFrames;		//00C count of group frames (Start, Detach, Attack, End, etc)
-	float		** frameData;	//010 pointer to float array of group frame times (size numFrames)
+	float** frameData;	//010 pointer to float array of group frame times (size numFrames)
 	UInt32		unk014;			//014
 	UInt32		unk018;			//018
 	UInt32		unk01C;			//01C
@@ -1209,7 +1210,7 @@ public:
 	UInt8		unk021;
 	UInt8		pad022[2];
 	UInt32		unk024;			//024
-	void		* unk028;		//028
+	void* unk028;		//028
 
 	static const char* StringForAnimGroupCode(UInt32 groupCode);
 	static UInt32 AnimGroupForString(const char* groupName);
@@ -1231,11 +1232,11 @@ public:
 
 //	void	** m_vtbl;		// 000
 	UInt32	m_offset;		// 004
-	void	* m_readProc;	// 008 - function pointer
-	void	* m_writeProc;	// 00C - function pointer
+	void* m_readProc;	// 008 - function pointer
+	void* m_writeProc;	// 00C - function pointer
 };
 
-class NiFile: public NiBinaryStream
+class NiFile : public NiBinaryStream
 {
 public:
 	NiFile();
@@ -1249,12 +1250,12 @@ public:
 	UInt32	m_unk014;	// 014 - Total read in buffer
 	UInt32	m_unk018;	// 018 - Consumed from buffer
 	UInt32	m_unk01C;	// 01C
-	void*	m_buffer;	// 020
-	FILE*	m_File;		// 024
+	void* m_buffer;	// 020
+	FILE* m_File;		// 024
 };
 
 // 158
-class BSFile: NiFile
+class BSFile : NiFile
 {
 public:
 	BSFile();
@@ -1368,7 +1369,7 @@ public:
 	NiCulledGeoList();
 	~NiCulledGeoList();
 
-	NiGeometry	** m_geo;		// 00
+	NiGeometry** m_geo;		// 00
 	UInt32		m_numItems;		// 04
 	UInt32		m_bufLen;		// 08
 	UInt32		m_bufGrowSize;	// 0C
@@ -1382,14 +1383,14 @@ public:
 	~NiCullingProcess();
 
 	virtual void	Destructor(bool freeMemory);
-	virtual void	Unk_01(void * arg);
-	virtual void	Cull(NiCamera * camera, NiAVObject * scene, NiCulledGeoList * culledGeo);
-	virtual void	AddGeo(NiGeometry * arg);
+	virtual void	Unk_01(void* arg);
+	virtual void	Cull(NiCamera* camera, NiAVObject* scene, NiCulledGeoList* culledGeo);
+	virtual void	AddGeo(NiGeometry* arg);
 
-//	void			** m_vtbl;		// 00
+	//	void			** m_vtbl;		// 00
 	UInt8			m_useAddGeoFn;	// 04 - call AddGeo when true, else just add to the list
 	UInt8			pad05[3];		// 05
-	NiCulledGeoList	* m_culledGeo;	// 08
+	NiCulledGeoList* m_culledGeo;	// 08
 };
 
 /**** BSTempEffects ****/
@@ -1402,7 +1403,7 @@ public:
 	~BSTempEffect();
 
 	float			duration;		// 08
-	TESObjectCELL*	cell;			// 0C
+	TESObjectCELL* cell;			// 0C
 	float			unk10;			// 10
 	UInt8			unk14;			// 14
 	UInt8			pad15[3];
@@ -1415,8 +1416,8 @@ public:
 	MagicHitEffect();
 	~MagicHitEffect();
 
-	ActiveEffect	* activeEffect;	// 18	
-	TESObjectREFR	* target;		// 1C
+	ActiveEffect* activeEffect;	// 18	
+	TESObjectREFR* target;		// 1C
 	float			unk20;			// 20	Init'd from ActiveEffect.timeElapsed
 	UInt8			unk24;			// 24	from ActiveEffect.EffectFlag
 	UInt8			pad25[3];
@@ -1432,10 +1433,10 @@ public:
 	UInt8					unk28;						// 28	Init'd to byte, OK for first offset.
 	UInt8					pad29[3];
 	UInt32					unk2C;						// 2C	Init'd to DWord
-	TESEffectShader			* effectShader;				// 30	Init'd to *effectShader
+	TESEffectShader* effectShader;				// 30	Init'd to *effectShader
 	float					unk34;						// 34	Init'd to float
 	BSSimpleArray<NiPointer<ParticleShaderProperty>>	unk38;	// 38	Init'd to BSSimpleArray<NiPointer<ParticleShaderProperty>>
 	// the remainder is not validated..
-	void					* textureEffectData;		// 48 seen TextureEffectData< BSSahderLightingProperty >, init'd to RefNiObject
+	void* textureEffectData;		// 48 seen TextureEffectData< BSSahderLightingProperty >, init'd to RefNiObject
 };	// Alloc'd to 6C, 68 is RefNiObject, 60 is Init'd to 1.0, 64 also
 	// 4C is byte, Init'd to 0 for non player, otherwize = Player.1stPersonSkeleton.Flags0030.Bit0 is null

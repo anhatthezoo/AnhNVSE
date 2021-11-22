@@ -6,6 +6,10 @@
 #include "nvse/GameForms.h"
 #include "nvse/GameData.h"
 #include "misc/scancodes.h"
+#include "nvse/NiNodes.h"
+#include "nvse/NiObjects.h"
+#include "nvse/NiTypes.h"
+#include "internal/netimmerse.h"
 #include <string>
 
 IDebugLog		gLog("AnhNVSE.log");
@@ -40,6 +44,7 @@ bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_
 #include "functions/fn_quest.h"
 #include "functions/fn_inventory.h"
 #include "functions/fn_arrays.h"
+#include "functions/fn_miscref.h"
 
 // This is a message handler for nvse events
 // With this, plugins can listen to messages such as whenever the game loads
@@ -184,5 +189,6 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	/*361A*/ REG_CMD(SetArmorARAlt);
 	/*361B*/ REG_CMD_STR(Sv_PadStart);
 	/*361C*/ REG_CMD_STR(Sv_PadEnd);
+	/*361D*/ REG_CMD(SetNifBlockVertexPosition);
 	return true;
 }

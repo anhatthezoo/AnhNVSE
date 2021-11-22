@@ -19,7 +19,7 @@ public:
 	~TESChildCell();
 
 	// no virtual destructor
-	virtual TESObjectCELL *	GetPersistentCell(void);		// 000
+	virtual TESObjectCELL* GetPersistentCell(void);		// 000
 
 //	void	** vtbl;	// 00
 };
@@ -50,7 +50,7 @@ public:
 	virtual void		Unk_5C(void);
 	virtual void		Unk_5D(void);
 	virtual void		Unk_5E(void);
-	virtual TESObjectREFR*		RemoveItem(TESForm* toRemove, BaseExtraList* extraList, UInt32 count, UInt32 unk3, UInt32 unk4, TESObjectREFR* destRef, 
+	virtual TESObjectREFR* RemoveItem(TESForm* toRemove, BaseExtraList* extraList, UInt32 count, UInt32 unk3, UInt32 unk4, TESObjectREFR* destRef,
 		UInt32 unk6, UInt32 unk7, UInt32 unk8, UInt8 unk9);	// 40 unk2 quantity? Returns the reference assigned to the removed item.
 	virtual void		Unk_60(void);
 	virtual void		Unk_61(void);	// Linked to AddItem, (item, count, ExtraDataList), func0042 in OBSE
@@ -72,14 +72,14 @@ public:
 	virtual void		AnimateNiNode(void);					// same in FOSE ! identical to Func0052 in OBSE which says (inits animation-related data, and more)
 	virtual void		GenerateNiNode(bool arg0);				// same in FOSE !
 	virtual void		Set3D(NiNode* niNode, bool unloadArt);	// same in FOSE !
-	virtual NiNode *	GetNiNode(void);						// same in FOSE !
+	virtual NiNode* GetNiNode(void);						// same in FOSE !
 	virtual void		Unk_75(void);
 	virtual void		Unk_76(void);
 	virtual void		Unk_77(void);
 	virtual void		Unk_78(void);
-	virtual AnimData*	GetAnimData(void);			// 0079
-	virtual ValidBip01Names * GetValidBip01Names(void);	// 007A	Character only
-	virtual ValidBip01Names * CallGetValidBip01Names(void);
+	virtual AnimData* GetAnimData(void);			// 0079
+	virtual ValidBip01Names* GetValidBip01Names(void);	// 007A	Character only
+	virtual ValidBip01Names* CallGetValidBip01Names(void);
 	virtual void		SetValidBip01Names(ValidBip01Names validBip01Names);
 	virtual void		GetPos(void);				// GetPos or GetDistance
 	virtual void		Unk_7E(UInt32 arg0);
@@ -102,13 +102,13 @@ public:
 	virtual void		Unk_8F(void);
 
 	enum {
-		kFlags_Unk00000002	= 0x00000002,
-		kFlags_Deleted		= 0x00000020,		// refr removed from .esp or savegame
-		kFlags_Persistent	= 0x00000400,		//shared bit with kFormFlags_QuestItem
-		kFlags_Temporary	= 0x00004000,
-		kFlags_Taken		= kFlags_Deleted | kFlags_Unk00000002,
+		kFlags_Unk00000002 = 0x00000002,
+		kFlags_Deleted = 0x00000020,		// refr removed from .esp or savegame
+		kFlags_Persistent = 0x00000400,		//shared bit with kFormFlags_QuestItem
+		kFlags_Temporary = 0x00004000,
+		kFlags_Taken = kFlags_Deleted | kFlags_Unk00000002,
 
-		kChanged_Inventory	= 0x08000000,
+		kChanged_Inventory = 0x08000000,
 	};
 
 	struct RenderState
@@ -118,7 +118,7 @@ public:
 		float	unk08;		// waterLevel
 		float	unk0C;
 		UInt32	unk10;		// flags most likely
-		NiNode	* niNode;	// same in FOSE
+		NiNode* niNode;	// same in FOSE
 		// possibly more, need to find alloc
 	};
 
@@ -135,18 +135,18 @@ public:
 
 	UInt32			unk1C;					// 01C
 
-	TESForm			* baseForm;				// 020
-	
+	TESForm* baseForm;				// 020
+
 	float			rotX, rotY, rotZ;		// 024 - either public or accessed via simple inline accessor common to all child classes
 	float			posX, posY, posZ;		// 030 - seems to be private
 	float			scale;					// 03C 
 
-	TESObjectCELL	* parentCell;			// 040
+	TESObjectCELL* parentCell;			// 040
 	ExtraDataList	extraDataList;			// 044
-	RenderState		* renderState;			// 064	- (05C in FOSE)
+	RenderState* renderState;			// 064	- (05C in FOSE)
 
 	ExtraScript* GetExtraScript() const;
-	ScriptEventList *	GetEventList() const;
+	ScriptEventList* GetEventList() const;
 
 	bool IsTaken() const { return (flags & kFlags_Taken) != 0; }
 	bool IsPersistent() const { return (flags & kFlags_Persistent) != 0; }
@@ -157,7 +157,7 @@ public:
 	bool Update3D_v1c();	// Less worse version as used by some modders
 	TESContainer* GetContainer();
 	bool IsMapMarker();
-	bool GetInventoryItems(InventoryItemsMap &invItems);
+	bool GetInventoryItems(InventoryItemsMap& invItems);
 	ExtraDroppedItemList* GetDroppedItems();
 
 	static TESObjectREFR* Create(bool bTemp = false);
@@ -233,8 +233,8 @@ public:
 	virtual void		Unk_BE(void);
 	virtual void		Unk_BF(void);
 	virtual void		Unk_C0(void);
-	
-	BaseProcess	* baseProcess;	// 068
+
+	BaseProcess* baseProcess;	// 068
 	UInt32		unk06C;			// 06C - loaded	set to the talking actor ref when initialising ExtraTalkingActor
 	UInt32		unk070;			// 070 - loaded
 	UInt32		unk074;			// 074 - loaded
@@ -278,17 +278,17 @@ public:
 	~MagicTarget();
 
 	virtual void	Destructor(void);
-	virtual TESObjectREFR *	GetParent(void);
-	virtual EffectNode *	GetEffectList(void);
+	virtual TESObjectREFR* GetParent(void);
+	virtual EffectNode* GetEffectList(void);
 
 	UInt8			byt004;		// 004 
 	UInt8			byt005;		// 005 
 	UInt8			byt006[2];	// 006-7
 	tList<void*>	lst008;		// 008
 
-	void RemoveEffect(EffectItem *effItem);
+	void RemoveEffect(EffectItem* effItem);
 
-	void StopEffect(void *arg0, bool arg1)
+	void StopEffect(void* arg0, bool arg1)
 	{
 		ThisStdCall(0x8248E0, this, arg0, arg1);
 	}
@@ -301,7 +301,7 @@ class hkaRaycastInterface
 public:
 	hkaRaycastInterface();
 	~hkaRaycastInterface();
-	virtual hkaRaycastInterface*	Destroy(bool doFree);
+	virtual hkaRaycastInterface* Destroy(bool doFree);
 	virtual void					Unk_01(void* arg0);
 	virtual void					Unk_02(void);
 
@@ -431,7 +431,7 @@ public:
 	virtual void		Unk_108(void);
 	virtual void		Unk_109(void);
 	virtual bool		IsInCombat(void);
-	virtual Actor		*GetCombatTarget(void);
+	virtual Actor* GetCombatTarget(void);
 	virtual void		Unk_10C(void);
 	virtual void		Unk_10D(void);
 	virtual void		Unk_10E(void);
@@ -475,19 +475,19 @@ public:
 	virtual void		Unk_134(void);
 	virtual void		Unk_135(void);
 	virtual void		Unk_136(void);
-	
+
 	MagicCaster			magicCaster;			// 088
 	MagicTarget			magicTarget;			// 094
 	ActorValueOwner		avOwner;				// 0A4
 	CachedValuesOwner	cvOwner;				// 0A8
 
-	bhkRagdollController				* ragDollController;			// 0AC
-	bhkRagdollPenetrationUtil			* ragDollPentrationUtil;		// 0B0
-	UInt32								unk0B4[(0x104-0x0b4) >> 2];		// 0B4
+	bhkRagdollController* ragDollController;			// 0AC
+	bhkRagdollPenetrationUtil* ragDollPentrationUtil;		// 0B0
+	UInt32								unk0B4[(0x104 - 0x0b4) >> 2];		// 0B4
 	UInt8								unk104;							// 104 Is in combat
 	UInt8								pad105[3];						// 105
 	UInt32								lifeState;						// 108 saved as byte HasHealth = 1 or 2, optionally 6
-	UInt32								unk10C[(0x140-0x10C) >> 2];		// 10B 12C is an array (of combat targets ?)
+	UInt32								unk10C[(0x140 - 0x10C) >> 2];		// 10B 12C is an array (of combat targets ?)
 	UInt32								unk140;							// 140 looks like a flag. Bit31 used while checking if non essential can take damage
 	UInt8                               unk144;							// 144
 	UInt8                               unk145;							// 145 Has to do with package evaluation
@@ -498,10 +498,10 @@ public:
 	UInt8								isSwimming;						// 14D
 	UInt8								unk14E;							// 14E
 	UInt8								unk14F;							// 14F
-	UInt32								unk150[(0x190-0x150) >> 2];		// 150	-	if Actor and not player: 0160 receives a copy of Pos[X,Y,Z] and Rot if 0170 is null during Func011B. 0170 receive ParentCell if Interior, Worldspace otherwize
-	ActorMover							* actorMover;					// 190
+	UInt32								unk150[(0x190 - 0x150) >> 2];		// 150	-	if Actor and not player: 0160 receives a copy of Pos[X,Y,Z] and Rot if 0170 is null during Func011B. 0170 receive ParentCell if Interior, Worldspace otherwize
+	ActorMover* actorMover;					// 190
 
-	UInt32								unk194[(0x1B0-0x194) >> 2];		// 184 Byt018D = PlayerTeammate, 1AC is a list (or not! I have it loaded from a byte)
+	UInt32								unk194[(0x1B0 - 0x194) >> 2];		// 184 Byt018D = PlayerTeammate, 1AC is a list (or not! I have it loaded from a byte)
 
 	UInt8								unk1B0;							// 1B0
 	UInt8								unk1B1;							// 1B1
@@ -510,7 +510,7 @@ public:
 	// OBSE: unk1 looks like quantity, usu. 1; ignored for ammo (equips entire stack). In NVSE, pretty much always forced internally to 1 
 	// OBSE: itemExtraList is NULL as the container changes entry is not resolved before the call
 	// NVSE: Default values are those used by the vanilla script functions.
-	void EquipItem(TESForm * objType, UInt32 equipCount = 1, ExtraDataList* itemExtraList = NULL, UInt32 unk3 = 1, bool lockEquip = false, UInt32 unk5 = 1);	// unk3 apply enchantment on player differently
+	void EquipItem(TESForm* objType, UInt32 equipCount = 1, ExtraDataList* itemExtraList = NULL, UInt32 unk3 = 1, bool lockEquip = false, UInt32 unk5 = 1);	// unk3 apply enchantment on player differently
 	void UnequipItem(TESForm* objType, UInt32 unequipCount = 1, ExtraDataList* itemExtraList = NULL, UInt32 unk3 = 1, bool lockEquip = false, UInt32 unk5 = 1);
 
 	EquippedItemsList	GetEquippedItems();
@@ -529,7 +529,7 @@ public:
 	virtual void		Unk_137(void);
 	virtual void		Unk_138(void);
 
-	ValidBip01Names	* validBip01Names;	// 1B4
+	ValidBip01Names* validBip01Names;	// 1B4
 	float			flt1B8;				// 1B8
 	float			flt1BC;				// 1BC
 	UInt8			byt1C0;				// 1C0
@@ -551,13 +551,13 @@ public:
 
 	// used to flag controls as disabled in disabledControlFlags
 	enum {
-		kControlFlag_Movement		= 1 << 0,
-		kControlFlag_Look			= 1 << 1,
-		kControlFlag_Pipboy			= 1 << 2,
-		kControlFlag_Fight			= 1 << 3,
-		kControlFlag_POVSwitch		= 1 << 4,
-		kControlFlag_RolloverText	= 1 << 5,
-		kControlFlag_Sneak			= 1 << 6,
+		kControlFlag_Movement = 1 << 0,
+		kControlFlag_Look = 1 << 1,
+		kControlFlag_Pipboy = 1 << 2,
+		kControlFlag_Fight = 1 << 3,
+		kControlFlag_POVSwitch = 1 << 4,
+		kControlFlag_RolloverText = 1 << 5,
+		kControlFlag_Sneak = 1 << 6,
 	};
 
 	virtual void		Unk_139(void);
@@ -565,16 +565,16 @@ public:
 
 	// lotsa data
 
-	UInt32								unk1C8[(0x244-0x1C8) >> 2];		// 1C8	0224 is a package of type 1C, 208 could be a DialogPackage, 206 questObjectiveTargets is valid
+	UInt32								unk1C8[(0x244 - 0x1C8) >> 2];		// 1C8	0224 is a package of type 1C, 208 could be a DialogPackage, 206 questObjectiveTargets is valid
 	float								unk244[0x4D];					// 244	have to be a set of ActorValue
 	float								unk378[0x4D];					// 378	have to be a set of ActorValue
 	UInt32								unk4AC;							// 4AC
 	float								unk4B0[0x4D];					// 4B0	have to be a set of ActorValue
-	BGSNote								* note;							// 5E4
+	BGSNote* note;							// 5E4
 	UInt32								unk574;							// 5E8
-	ImageSpaceModifierInstanceDOF		* unk5EC;						// 5EC
-	ImageSpaceModifierInstanceDOF		* unk5F0;						// 5F0
-	ImageSpaceModifierInstanceDRB		* unk5F4;						// 5F4
+	ImageSpaceModifierInstanceDOF* unk5EC;						// 5EC
+	ImageSpaceModifierInstanceDOF* unk5F0;						// 5F0
+	ImageSpaceModifierInstanceDRB* unk5F4;						// 5F4
 	UInt32								unk5F8;							// 5F8
 	tList<Actor>						teammates;						// 5FC
 	UInt32								unk604[(0x648 - 0x604) >> 2];	// 604
@@ -583,21 +583,21 @@ public:
 	bool								unk64A;							// 64A	= not FirstPerson
 	UInt8								unk64B;							// 64B
 	bool								bThirdPerson;					// 64C
-	UInt8								unk64D[3];	
+	UInt8								unk64D[3];
 	UInt32								unk650[(0x680 - 0x650) >> 2];	// 650 
 	UInt8								disabledControlFlags;			// 680 kControlFlag_xxx
 	UInt8								unk0681[3];						// 681
 	UInt32								unk684[(0x68C - 0x684) >> 2];	// 684
-	ValidBip01Names						* playerVB01N;					// 68C
-	ExtraAnim::Animation				* extraAnimation;				// 690 ExtraDataAnim::Data
-	NiNode								* playerNode;					// 694 used as node if unk64A is true
-	UInt32								unk698[(0x6A8-0x698) >> 2];		// 698
-	TESTopic							* topic;						// 6A8
+	ValidBip01Names* playerVB01N;					// 68C
+	ExtraAnim::Animation* extraAnimation;				// 690 ExtraDataAnim::Data
+	NiNode* playerNode;					// 694 used as node if unk64A is true
+	UInt32								unk698[(0x6A8 - 0x698) >> 2];		// 698
+	TESTopic* topic;						// 6A8
 	UInt32								unk6AC[3];						// 6AC
-	TESQuest							* quest;						// 6B8
+	TESQuest* quest;						// 6B8
 	tList<BGSQuestObjective>			questObjectiveList;				// 6BC
 	UInt32								unk6C4[39];				// 6C4
-	TESRegion							*currentRegion;			// 760
+	TESRegion* currentRegion;			// 760
 	TESRegionList						regionsList;			// 764
 	UInt32								unk770[18];				// 770
 	UInt8								gameDifficulty;			// 7B8
@@ -607,7 +607,7 @@ public:
 	UInt32								unk7C0[49];				// 7C0
 	tList<BGSEntryPointPerkEntry>		perkEntries[74];		// 884
 	UInt32								unkAD4[164];			// AD4
-	CombatActors						*combatActors;			// D64
+	CombatActors* combatActors;			// D64
 	UInt32								unkD68[3];				// D68
 	UInt8								unkD74[96];				// D74
 	UInt32								unkDD4[(0x0E50 - 0x0DD4) / 4];	// DD4
@@ -625,9 +625,9 @@ public:
 
 	bool IsThirdPerson() { return bThirdPerson ? true : false; }
 	UInt32 GetMovementFlags() { return actorMover->Unk_08(); }	// 11: IsSwimming, 9: IsSneaking, 8: IsRunning, 7: IsWalking, 0: keep moving
-	bool IsPlayerSwimming() { return (GetMovementFlags()  >> 11) & 1; }
+	bool IsPlayerSwimming() { return (GetMovementFlags() >> 11) & 1; }
 
-	static PlayerCharacter*	GetSingleton();
+	static PlayerCharacter* GetSingleton();
 	bool SetSkeletonPath(const char* newPath);
 	bool SetSkeletonPath_v1c(const char* newPath);	// Less worse version as used by some modders
 	static void UpdateHead(void);

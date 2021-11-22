@@ -35,7 +35,10 @@ struct NiQuaternion
 // 24
 struct NiMatrix33
 {
-	float	data[9];
+	float	cr[3][3];
+	//float	cr[3][3];
+	void __fastcall ExtractAngles(NiVector3* outAngles);
+	NiMatrix33* __fastcall RotationMatrix(NiVector3* rot); // From JIP
 };
 
 // 34
