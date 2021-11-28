@@ -316,6 +316,14 @@ struct NVSEMessagingInterface
 *
 *********************************************************************************************/
 
+template <typename T_Ret = void, typename ...Args>
+__forceinline T_Ret ThisCall(UInt32 _addr, void* _this, Args ...args)
+{
+	return ((T_Ret(__thiscall*)(void*, Args...))_addr)(_this, std::forward<Args>(args)...);
+}
+
+#define GameHeapFree(ptr) ThisCall<void, void*>(0xAA4060, (void*)0x11F6238, ptr)
+
 #if RUNTIME
 
 struct NVSEArrayVarInterface
@@ -328,7 +336,6 @@ struct NVSEArrayVarInterface
 
 	struct Element
 	{
-	protected:
 		union
 		{
 			char* str;
@@ -341,7 +348,6 @@ struct NVSEArrayVarInterface
 		friend class PluginAPI::ArrayAPI;
 		friend class ArrayVar;
 		void Reset() { if (type == kType_String) { FormHeap_Free(str); type = kType_Invalid; str = NULL; } }
-	public:
 		enum
 		{
 			kType_Invalid,
@@ -362,6 +368,8 @@ struct NVSEArrayVarInterface
 		Element(const Element& rhs) { if (rhs.type == kType_String) { str = CopyCString(rhs.str); } else { num = rhs.num; } type = rhs.type; }
 		Element& operator=(const Element& rhs) { if (this != &rhs) { Reset(); if (rhs.type == kType_String) str = CopyCString(rhs.str); else num = rhs.num; type = rhs.type; } return *this; }
 
+
+
 		bool IsValid() const { return type != kType_Invalid; }
 		UInt8 GetType() const { return type; }
 
@@ -369,6 +377,64 @@ struct NVSEArrayVarInterface
 		Array* Array() { return type == kType_Array ? arr : NULL; }
 		TESForm* Form() { return type == kType_Form ? form : NULL; }
 		double Number() { return type == kType_Numeric ? num : 0.0; }
+	};
+
+	struct ElementL : Element
+	{
+		ElementL() { type = kType_Invalid; }
+		ElementL(double _num) { type = kType_Numeric; num = _num; }
+		ElementL(TESForm* _form) { type = kType_Form; form = _form; }
+		ElementL(const char* _str) { type = kType_String; str = const_cast<char*>(_str); }
+		ElementL(NVSEArrayVarInterface::Array* _arr) { type = kType_Array; arr = _arr; }
+		ElementL(const Element& rhs)
+		{
+			num = rhs.num;
+			type = rhs.type;
+		}
+
+		ElementL& operator=(double _num) { type = kType_Numeric; num = _num; return *this; }
+		ElementL& operator=(TESForm* _form) { type = kType_Form; form = _form; return *this; }
+		ElementL& operator=(const char* _str) { type = kType_String; str = const_cast<char*>(_str); return *this; }
+		ElementL& operator=(NVSEArrayVarInterface::Array* _arr) { type = kType_Array; arr = _arr; return *this; }
+		ElementL& operator=(const Element& rhs)
+		{
+			num = rhs.num;
+			type = rhs.type;
+			return *this;
+		}
+	};
+
+	struct ElementR : Element
+	{
+		ElementR() { type = kType_Invalid; }
+		ElementR(double _num) { type = kType_Numeric; num = _num; }
+		ElementR(TESForm* _form) { type = kType_Form; form = _form; }
+		ElementR(const char* _str) { type = kType_String; str = CopyCString(_str); }
+		ElementR(NVSEArrayVarInterface::Array* _arr) { type = kType_Array; arr = _arr; }
+		ElementR(const Element& rhs)
+		{
+			type = rhs.type;
+			if (type == kType_String)
+				str = CopyCString(rhs.str);
+			else num = rhs.num;
+		}
+
+		~ElementR() { if (type == kType_String) GameHeapFree(str); }
+
+		ElementR& operator=(double _num) { type = kType_Numeric; num = _num; return *this; }
+		ElementR& operator=(TESForm* _form) { type = kType_Form; form = _form; return *this; }
+		ElementR& operator=(const char* _str) { type = kType_String; str = CopyCString(_str); return *this; }
+		ElementR& operator=(NVSEArrayVarInterface::Array* _arr) { type = kType_Array; arr = _arr; return *this; }
+		ElementR& operator=(const Element& rhs)
+		{
+			if (type == kType_String)
+				GameHeapFree(str);
+			type = rhs.type;
+			if (type == kType_String)
+				str = CopyCString(rhs.str);
+			else num = rhs.num;
+			return *this;
+		}
 	};
 
 	Array* (*CreateArray)(const Element* data, UInt32 size, Script* callingScript);
@@ -388,6 +454,7 @@ struct NVSEArrayVarInterface
 	UInt32(*GetArrayPacked)(Array* arr);
 
 };
+
 
 #endif
 

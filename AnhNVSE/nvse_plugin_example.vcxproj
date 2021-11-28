@@ -376,6 +376,7 @@
     <ClInclude Include="functions\fn_quest.h" />
     <ClInclude Include="functions\fn_strings.h" />
     <ClInclude Include="internal\netimmerse.h" />
+    <ClInclude Include="internal\utility.h" />
     <ClInclude Include="misc\scancodes.h" />
   </ItemGroup>
   <ItemGroup>

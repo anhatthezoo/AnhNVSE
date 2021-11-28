@@ -154,6 +154,9 @@
     <ClInclude Include="functions\fn_miscref.h">
       <Filter>functions</Filter>
     </ClInclude>
+    <ClInclude Include="internal\utility.h">
+      <Filter>internal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="exports.def" />

@@ -1,3 +1,4 @@
+#include "internal/utility.h"
 #include "nvse/PluginAPI.h"
 #include "nvse/CommandTable.h"
 #include "nvse/GameAPI.h"
@@ -189,6 +190,6 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	/*361A*/ REG_CMD(SetArmorARAlt);
 	/*361B*/ REG_CMD_STR(Sv_PadStart);
 	/*361C*/ REG_CMD_STR(Sv_PadEnd);
-	/*361D*/ REG_CMD(SetNifBlockVertexPosition);
+	
 	return true;
 }
