@@ -27,10 +27,10 @@ static ParamInfo kParams_OneArray_OneFloat[2] = {
 	{"float", kParamType_Float, 0}
 };
 
-static ParamInfo kParams_TwoArrays_OneFloat_OneInt[4] = {
+static ParamInfo kParams_TwoArrays_OneFloat_OneOptionalInt[4] = {
 	{"array", kParamType_Integer, 0},
 	{"float", kParamType_Float, 0},
-	{"int", kParamType_Integer, 0}
+	{"int", kParamType_Integer, 1}
 };
 
 //lnk2001 moment
@@ -135,7 +135,7 @@ DEFINE_COMMAND_PLUGIN(QMultQuatQuatAlt, "", 0, 2, kParams_TwoArrays);
 DEFINE_COMMAND_PLUGIN(QMultQuatVector3Alt, "", 0, 2, kParams_TwoArrays);
 DEFINE_COMMAND_PLUGIN(QNormalizeAlt, "", 0, 1, kParams_OneArray);
 DEFINE_COMMAND_PLUGIN(QFromAxisAngleAlt, "", 0, 2, kParams_OneArray_OneFloat);
-DEFINE_COMMAND_PLUGIN(QInterpolateAlt, "", 0, 4, kParams_TwoArrays_OneFloat_OneInt);
+DEFINE_COMMAND_PLUGIN(QInterpolateAlt, "", 0, 4, kParams_TwoArrays_OneFloat_OneOptionalInt);
 DEFINE_COMMAND_PLUGIN(V3Dotproduct, "", 0, 2, kParams_TwoArrays);
 
 #if RUNTIME
@@ -300,7 +300,7 @@ bool Cmd_QInterpolateAlt_Execute(COMMAND_ARGS) {
 	*result = 0;
 	UInt32 srcID1, srcID2;
 	float t;
-	int slerpFlag;
+	int slerpFlag = 0;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &srcID1, &srcID2, &t, &slerpFlag)) {
 		NVSEArrayVar* srcArr1 = g_arrInterface->LookupArrayByID(srcID1);
 		NVSEArrayVar* srcArr2 = g_arrInterface->LookupArrayByID(srcID2);
