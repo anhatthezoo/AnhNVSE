@@ -365,3 +365,36 @@ static ParamInfo kParams_OneForm_TwoInts[3] =
 	{	"int",	kParamType_Integer,	0	},
 	{	"int",	kParamType_Integer,	0	},
 };
+
+static ParamInfo kParams_OneArray[1] = {
+	{"array", kParamType_Integer, 0}
+};
+
+static ParamInfo kParams_TwoArrays[2] = {
+	{"array", kParamType_Integer, 0},
+	{"array", kParamType_Integer, 0}
+};
+
+static ParamInfo kParams_OneArray_OneFloat[2] = {
+	{"array", kParamType_Integer, 0},
+	{"float", kParamType_Float, 0}
+};
+
+static ParamInfo kParams_TwoArrays_OneFloat_OneOptionalInt[4] = {
+	{"array", kParamType_Integer, 0},
+	{"float", kParamType_Float, 0},
+	{"int", kParamType_Integer, 1}
+};
+
+static ParamInfo kParams_ThreeArrays_OneFloat[4] = {
+	{"array", kParamType_Integer, 0},
+	{"array", kParamType_Integer, 0},
+	{"array", kParamType_Integer, 0},
+	{"float", kParamType_Float, 0}
+};
+
+static ParamInfo kParams_TwoArrays_OneFloat[3] = {
+	{"array", kParamType_Integer, 0},
+	{"array", kParamType_Integer, 0},
+	{"float", kParamType_Float, 0}
+};

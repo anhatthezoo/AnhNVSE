@@ -40,11 +40,12 @@ NVSEScriptInterface* g_script;
 bool (*ExtractArgsEx)(COMMAND_ARGS_EX, ...);
 bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_EX, UInt32 maxParams, ...);
 
+
+#include "functions/fn_arrays.h"
 #include "functions/fn_math.h"
 #include "functions/fn_strings.h"
 #include "functions/fn_quest.h"
 #include "functions/fn_inventory.h"
-#include "functions/fn_arrays.h"
 #include "functions/fn_miscref.h"
 
 // This is a message handler for nvse events
@@ -98,7 +99,7 @@ bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 	// fill out the info structure
 	info->infoVersion = PluginInfo::kInfoVersion;
 	info->name = "AnhNVSE";
-	info->version = 102;
+	info->version = 120;
 
 	// version checks
 	if (nvse->nvseVersion < PACKED_NVSE_VERSION)
@@ -191,8 +192,12 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	/*361B*/ REG_CMD_STR(Sv_PadStart);
 	/*361C*/ REG_CMD_STR(Sv_PadEnd);
 
-	CreateArray = g_arrInterface->CreateArray;
-	AssignCommandResult = g_arrInterface->AssignCommandResult;
+	// ===== v1.2.0 =====
+	/*361D*/ REG_CMD_ARR(V3Lerp);
+	/*361E*/ REG_CMD_ARR(GenerateBezierPoints);
+
+	//CreateArray = g_arrInterface->CreateArray;
+	//AssignCommandResult = g_arrInterface->AssignCommandResult;
 	
 	return true;
 }
