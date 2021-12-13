@@ -3,9 +3,6 @@
 #include <nvse/ScriptUtils.h>
 #include <algohol/algTypes.h>
 
-typedef NVSEArrayVarInterface::Array NVSEArrayVar;
-typedef NVSEArrayVarInterface::Element NVSEArrayElement;
-
 static ParamInfo kParams_TwoArrays_OneFloat_OneInt[4] = {
 	{"array", kParamType_Integer, 0},
 	{"float", kParamType_Float, 0},
@@ -133,11 +130,8 @@ bool Cmd_V3NormalizeAlt_Execute(COMMAND_ARGS) {
 			v.z = elements[2].Number();
 
 			V3Normalize(v);
-			NVSEArrayElement* newElements = new NVSEArrayElement[srcArrSize];
-			newElements[0] = v.x;
-			newElements[1] = v.y;
-			newElements[2] = v.z;
-			NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElements, srcArrSize, scriptObj);
+			ArrayElementL newElem[3] = { v.x, v.y, v.z };
+			NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, srcArrSize, scriptObj);
 			g_arrInterface->AssignCommandResult(newArr, result);
 
 			delete[] elements;
@@ -169,12 +163,9 @@ bool Cmd_V3CrossproductAlt_Execute(COMMAND_ARGS) {
 			v2.z = elements[2].Number();
 
 			Vector3 out = V3Crossproduct(v1, v2);
-			NVSEArrayElement* outElements = new NVSEArrayElement[size1];
-			outElements[0] = out.x;
-			outElements[1] = out.y;	
-			outElements[2] = out.z;
-			NVSEArrayVar* outArr = g_arrInterface->CreateArray(outElements, size1, scriptObj);
-			g_arrInterface->AssignCommandResult(outArr, result);
+			ArrayElementL newElem[3] = { out.x, out.y, out.z };
+			NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, 3, scriptObj);
+			g_arrInterface->AssignCommandResult(newArr, result);
 
 			delete[] elements;
 		}
@@ -207,10 +198,9 @@ bool Cmd_QMultQuatQuatAlt_Execute(COMMAND_ARGS) {
 			q2.z = elements[0].Number();
 
 			Quat out = q1 * q2;
-			NVSEArrayElement* outElements = new NVSEArrayElement[size1];
-			outElements[0] = out.w;	outElements[1] = out.x;	outElements[2] = out.y; outElements[3] = out.z;
-			NVSEArrayVar* outArr = g_arrInterface->CreateArray(outElements, size1, scriptObj);
-			g_arrInterface->AssignCommandResult(outArr, result);
+			ArrayElementL newElem[4] = { out.w, out.x, out.y, out.z };
+			NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, 4, scriptObj);
+			g_arrInterface->AssignCommandResult(newArr, result);
 
 			delete[] elements;
 		}
@@ -242,10 +232,9 @@ bool Cmd_QMultQuatVector3Alt_Execute(COMMAND_ARGS) {
 			v.z = elements[2].Number();
 
 			Vector3 out = q * v;
-			NVSEArrayElement* outElements = new NVSEArrayElement[size1];
-			outElements[0] = out.x;	outElements[1] = out.y; outElements[2] = out.z;
-			NVSEArrayVar* outArr = g_arrInterface->CreateArray(outElements, size1, scriptObj);
-			g_arrInterface->AssignCommandResult(outArr, result);
+			ArrayElementL newElem[3] = { out.x, out.y, out.z };
+			NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, 3, scriptObj);
+			g_arrInterface->AssignCommandResult(newArr, result);
 
 			delete[] elements;
 		}
@@ -270,13 +259,9 @@ bool Cmd_QNormalizeAlt_Execute(COMMAND_ARGS) {
 			q.z = elements[3].Number();
 
 			q.normalize();
-			NVSEArrayElement* outElements = new NVSEArrayElement[size];
-			outElements[0] = q.w;	
-			outElements[1] = q.x; 
-			outElements[2] = q.y; 
-			outElements[3] = q.z;
-			NVSEArrayVar* outArr = g_arrInterface->CreateArray(outElements, size, scriptObj);
-			g_arrInterface->AssignCommandResult(outArr, result);
+			ArrayElementL newElem[4] = { q.w, q.x, q.y, q.z };
+			NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, 4, scriptObj);
+			g_arrInterface->AssignCommandResult(newArr, result);
 
 			delete[] elements;
 		}
@@ -301,13 +286,9 @@ bool Cmd_QFromAxisAngleAlt_Execute(COMMAND_ARGS) {
 			axis.z = elements[2].Number();
 
 			Quat out = fromAxisAngle(axis, angle);
-			NVSEArrayElement* outElements = new NVSEArrayElement[size];
-			outElements[0] = out.w;
-			outElements[1] = out.x;
-			outElements[2] = out.y;
-			outElements[3] = out.z;
-			NVSEArrayVar* outArr = g_arrInterface->CreateArray(outElements, size, scriptObj);
-			g_arrInterface->AssignCommandResult(outArr, result);
+			ArrayElementL newElem[4] = { out.w, out.x, out.y, out.z };
+			NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, 4, scriptObj);
+			g_arrInterface->AssignCommandResult(newArr, result);
 
 			delete[] elements;
 		}
@@ -347,13 +328,9 @@ bool Cmd_QInterpolateAlt_Execute(COMMAND_ARGS) {
 			else
 				out = slerp(q1, q2, t);
 
-			NVSEArrayElement* outElements = new NVSEArrayElement[size1];
-			outElements[0] = out.w;
-			outElements[1] = out.x; 
-			outElements[2] = out.y; 
-			outElements[3] = out.z;
-			NVSEArrayVar* outArr = g_arrInterface->CreateArray(outElements, size1, scriptObj);
-			g_arrInterface->AssignCommandResult(outArr, result);
+			ArrayElementL newElem[4] = { out.w, out.x, out.y, out.z };
+			NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, 4, scriptObj);
+			g_arrInterface->AssignCommandResult(newArr, result);
 
 			delete[] elements;
 		}

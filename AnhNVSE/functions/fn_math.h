@@ -109,13 +109,10 @@ bool Cmd_GenerateBezierPoints_Execute(COMMAND_ARGS) {
 		v3.z = elements[2].Number();
 
 		newVec = V3Lerp((V3Lerp(v1, v2, t)), (V3Lerp(v2, v3, t)), t);
-		NVSEArrayElement* newElements = new NVSEArrayElement[3];
-		newElements[0] = newVec.x;
-		newElements[1] = newVec.y;
-		newElements[2] = newVec.z;
-		NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElements, 3, scriptObj);
+		ArrayElementL newElem[3] = { newVec.x, newVec.y, newVec.z };
+		NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, 3, scriptObj);
 		g_arrInterface->AssignCommandResult(newArr, result);
-		
+
 		delete[] elements;
 	}
 	return true;
@@ -144,11 +141,8 @@ bool Cmd_V3Lerp_Execute(COMMAND_ARGS) {
 		v2.z = elements[2].Number();
 		Vector3 lerpVec = V3Lerp(v1, v2, t);
 
-		NVSEArrayElement* newElements = new NVSEArrayElement[3];
-		newElements[0] = lerpVec.x;
-		newElements[1] = lerpVec.y;
-		newElements[2] = lerpVec.z;
-		NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElements, 3, scriptObj);
+		ArrayElementL newElem[3] = { lerpVec.x, lerpVec.y, lerpVec.z };
+		NVSEArrayVar* newArr = g_arrInterface->CreateArray(newElem, 3, scriptObj);
 		g_arrInterface->AssignCommandResult(newArr, result);
 
 		delete[] elements;

@@ -6,11 +6,11 @@
 #include "nvse/GameObjects.h"
 #include "nvse/GameForms.h"
 #include "nvse/GameData.h"
-#include "misc/scancodes.h"
 #include "nvse/NiNodes.h"
 #include "nvse/NiObjects.h"
 #include "nvse/NiTypes.h"
 #include "internal/netimmerse.h"
+#include "misc/scancodes.h"
 #include <string>
 
 IDebugLog		gLog("AnhNVSE.log");
@@ -195,6 +195,7 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	// ===== v1.2.0 =====
 	/*361D*/ REG_CMD_ARR(V3Lerp);
 	/*361E*/ REG_CMD_ARR(GenerateBezierPoints);
+	/*361F*/ REG_CMD(TestNifFunc);
 
 	//CreateArray = g_arrInterface->CreateArray;
 	//AssignCommandResult = g_arrInterface->AssignCommandResult;
