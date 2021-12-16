@@ -121,7 +121,7 @@ public:
 	};
 
 	NiNode* m_parent;				// 18
-	//bhkNiCollisionObject* m_collisionObject;		// 1C
+	/* bhkNiCollisionObject* */ void* m_collisionObject;		// 1C
 	NiSphere* m_kWorldBound;			// 20
 	DList<NiProperty>		m_propertyList;			// 24
 	UInt32					m_flags;				// 30
@@ -141,7 +141,7 @@ public:
 	void DumpProperties();
 	void DumpParents();
 };
-STATIC_ASSERT(sizeof(NiAVObject) == 0x98);
+STATIC_ASSERT(sizeof(NiAVObject) == 0x9C);
 
 #if 0
 
