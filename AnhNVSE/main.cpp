@@ -195,7 +195,7 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	// ===== v1.2.0 =====
 	/*361D*/ REG_CMD_ARR(V3Lerp);
 	/*361E*/ REG_CMD_ARR(GenerateBezierPoints);
-	/*361F*/ REG_CMD(TestNifFunc);
+	/*361F*/ REG_CMD(TestQuestFunc);
 
 	//CreateArray = g_arrInterface->CreateArray;
 	//AssignCommandResult = g_arrInterface->AssignCommandResult;
