@@ -83,6 +83,11 @@ bool Cmd_Tanh_Execute(COMMAND_ARGS) {
 	return true;
 }
 
+Vector3 GenerateBezierPoints(Vector3 v1, Vector3 v2, Vector3 v3, float t) {
+	Vector3 newVec = V3Lerp((V3Lerp(v1, v2, t)), (V3Lerp(v2, v3, t)), t);
+	return newVec;
+}
+
 bool Cmd_GenerateBezierPoints_Execute(COMMAND_ARGS) {
 	*result = 0;
 	UInt32 arrID1, arrID2, arrID3;
@@ -116,7 +121,7 @@ bool Cmd_GenerateBezierPoints_Execute(COMMAND_ARGS) {
 		delete[] elements;
 	}
 	return true;
-} 
+}
 
 bool Cmd_V3Lerp_Execute(COMMAND_ARGS) {
 	*result = 0;
@@ -139,6 +144,7 @@ bool Cmd_V3Lerp_Execute(COMMAND_ARGS) {
 		v2.x = elements[0].Number();
 		v2.y = elements[1].Number();
 		v2.z = elements[2].Number();
+
 		Vector3 lerpVec = V3Lerp(v1, v2, t);
 
 		ArrayElementL newElem[3] = { lerpVec.x, lerpVec.y, lerpVec.z };

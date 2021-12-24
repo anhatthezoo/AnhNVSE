@@ -200,8 +200,8 @@ STATIC_ASSERT(sizeof(ModList) == 0x408);
 class DataHandler
 {
 public:
-	DataHandler();
-	~DataHandler();
+	//DataHandler();
+	//~DataHandler();
 
 	UInt32							unk00;					// 000
 	BoundObjectListHead				* boundObjectList;		// 004

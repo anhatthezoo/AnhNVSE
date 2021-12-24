@@ -21,6 +21,7 @@ NVSEStringVarInterface* g_stringvarInterface;
 NVSEArrayVarInterface* g_arrInterface;
 NVSEInterface* g_nvseInterface;
 NVSECommandTableInterface* g_cmdTable;
+DataHandler* g_dataHandler;
 const CommandInfo* g_TFC;
 
 #if RUNTIME  
@@ -154,6 +155,8 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 
 		g_script = (NVSEScriptInterface*)nvse->QueryInterface(kInterface_Script);
 		ExtractArgsEx = g_script->ExtractArgsEx;
+
+		g_dataHandler = (DataHandler*)nvse->QueryInterface(kInterface_Data);
 	}
 	
 	nvse->SetOpcodeBase(0x3600);
@@ -195,7 +198,7 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	// ===== v1.2.0 =====
 	/*361D*/ REG_CMD_ARR(V3Lerp);
 	/*361E*/ REG_CMD_ARR(GenerateBezierPoints);
-	/*361F*/ REG_CMD(TestQuestFunc);
+	/*361F*/ REG_CMD(UpdateTubeMesh);
 
 	//CreateArray = g_arrInterface->CreateArray;
 	//AssignCommandResult = g_arrInterface->AssignCommandResult;

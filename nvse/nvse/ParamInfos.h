@@ -398,3 +398,12 @@ static ParamInfo kParams_TwoArrays_OneFloat[3] = {
 	{"array", kParamType_Integer, 0},
 	{"float", kParamType_Float, 0}
 };
+
+ParamInfo kParams_OneString_OneInt_ThreeArrays[] =
+{
+	{"String", kParamType_String, 0},
+	{"int", kParamType_Integer, 0},
+	{"array", kParamType_Integer, 0},
+	{"array", kParamType_Integer, 0},
+	{"array", kParamType_Integer, 0}
+};
