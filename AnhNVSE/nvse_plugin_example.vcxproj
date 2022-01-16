@@ -372,6 +372,7 @@
     <ClInclude Include="functions\fn_arrays.h" />
     <ClInclude Include="functions\fn_inventory.h" />
     <ClInclude Include="functions\fn_math.h" />
+    <ClInclude Include="functions\fn_misc.h" />
     <ClInclude Include="functions\fn_miscref.h" />
     <ClInclude Include="functions\fn_quest.h" />
     <ClInclude Include="functions\fn_strings.h" />

@@ -407,3 +407,27 @@ ParamInfo kParams_OneString_OneInt_ThreeArrays[] =
 	{"array", kParamType_Integer, 0},
 	{"array", kParamType_Integer, 0}
 };
+
+static ParamInfo kParams_OneDouble[] = {
+	{	"Double", kParamType_Double, 0	}
+};
+
+static ParamInfo kParams_TwoArrays_OneFloat_OneInt[4] = {
+	{"array", kParamType_Integer, 0},
+	{"float", kParamType_Float, 0},
+	{"int", kParamType_Integer, 0}
+};
+
+
+static ParamInfo kParams_OneString_OneInt_OneString[3] =
+{
+	{	"string",	kParamType_String,	0	},
+	{	"max_length",	kParamType_Integer,	0	},
+	{	"string",	kParamType_String,	0	},
+};
+
+static ParamInfo kParams_TwoForms[2] =
+{
+	{	"form",	kParamType_AnyForm,	0	},
+	{	"form",	kParamType_AnyForm,	0	},
+};

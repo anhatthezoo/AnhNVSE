@@ -48,15 +48,16 @@ bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_
 #include "functions/fn_quest.h"
 #include "functions/fn_inventory.h"
 #include "functions/fn_miscref.h"
+#include "functions/fn_misc.h"
 
 // This is a message handler for nvse events
 // With this, plugins can listen to messages such as whenever the game loads
-/*void MessageHandler(NVSEMessagingInterface::Message* msg)
+void MessageHandler(NVSEMessagingInterface::Message* msg)
 {
 	switch (msg->type)
 	{
-	case NVSEMessagingInterface::kMessage_LoadGame:
-		//_MESSAGE("Received load game message with file path %s", msg->data);
+	case NVSEMessagingInterface::kMessage_DeferredInit:
+		Console_Print("AnhNVSE v1.2.0");
 		break;
 	case NVSEMessagingInterface::kMessage_SaveGame:
 		//_MESSAGE("Received save game message with file path %s", msg->data);
@@ -91,7 +92,7 @@ bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_
 	default:
 		break;
 	}
-} */
+} 
 
 bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 {
@@ -150,8 +151,8 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 		g_stringvarInterface = (NVSEStringVarInterface*)nvse->QueryInterface(kInterface_StringVar);
 		g_arrInterface = (NVSEArrayVarInterface*)nvse->QueryInterface(kInterface_ArrayVar);
 		ExtractFormatStringArgs = g_script->ExtractFormatStringArgs;
-		//g_messagingInterface = (NVSEMessagingInterface*)nvse->QueryInterface(kInterface_Messaging);
-		//g_messagingInterface->RegisterListener(g_pluginHandle, "NVSE", MessageHandler);
+		g_messagingInterface = (NVSEMessagingInterface*)nvse->QueryInterface(kInterface_Messaging);
+		g_messagingInterface->RegisterListener(g_pluginHandle, "NVSE", MessageHandler);
 
 		g_script = (NVSEScriptInterface*)nvse->QueryInterface(kInterface_Script);
 		ExtractArgsEx = g_script->ExtractArgsEx;
@@ -197,11 +198,21 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 
 	// ===== v1.2.0 =====
 	/*361D*/ REG_CMD_ARR(V3Lerp);
-	/*361E*/ REG_CMD_ARR(GenerateBezierPoints);
+	/*361E*/ REG_CMD_ARR(GenerateBezierPoint);
 	/*361F*/ REG_CMD(UpdateTubeMesh);
+	/*3620*/ REG_CMD_ARR(V3Mult);
+	/*3621*/ REG_CMD_ARR(V3MultByScalar);
+	/*3622*/ REG_CMD_STR(Sv_Capitalize);
+	/*3623*/ REG_CMD(Ar_Min);
+	/*3624*/ REG_CMD(Ar_Max);
+	/*3625*/ REG_CMD(Ar_RangeMath);
+	/*3626*/ REG_CMD(GetZoneMinLevel);
+	/*3627*/ REG_CMD(GetZoneMatchLevel);
+	/*3628*/ REG_CMD_FORM(GetZoneOwner);
+	/*3629*/ REG_CMD(GetZoneLevel);
+	/*362A*/ REG_CMD(SetZoneMinLevel);
+	/*362B*/ REG_CMD(SetZoneOwner);
 
-	//CreateArray = g_arrInterface->CreateArray;
-	//AssignCommandResult = g_arrInterface->AssignCommandResult;
 	
 	return true;
 }

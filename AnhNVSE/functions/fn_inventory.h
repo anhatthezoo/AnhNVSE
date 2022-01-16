@@ -3,19 +3,19 @@
 #include "GameObjects.h"
 #include "GameProcess.h"
 
-#define DEFINE_SET_INV_FLOAT(name, desc) DEFINE_COMMAND_PLUGIN(name, desc, 0, 2, kParams_OneFloat_OneOptionalObjectID);
+#define DEFINE_SET_INV_FLOAT(name, alt) DEFINE_COMMAND_PLUGIN(name, alt, 0, 2, kParams_OneFloat_OneOptionalObjectID);
 #define DEFINE_GET_INV_COND(name, alt, desc) DEFINE_CMD_ALT_COND_PLUGIN(name, alt, desc, false, kParams_OneOptionalObjectID);
 #define DEFINE_SET_INV_INT(name, alt, desc) DEFINE_COMMAND_ALT_PLUGIN(name, alt, desc, false, 2, kParams_OneInt_OneOptionalObjectID);
 
-DEFINE_SET_INV_FLOAT(SetWeaponAnimJamTime, sets the duration fOr weapons jam animation);
-DEFINE_SET_INV_FLOAT(SetWeaponAnimReloadTime, sets the duration fOr weapons reload animation);
-DEFINE_SET_INV_FLOAT(SetWeaponAnimShotsPerSec, sets animshotspersec);
-DEFINE_SET_INV_FLOAT(SetWeaponFireDelayMin, sets firedelaymin);
-DEFINE_SET_INV_FLOAT(SetWeaponFireDelayMax, sets firedelaymax);
-DEFINE_SET_INV_FLOAT(SetWeaponRumbleDuration, sets rumble duration);
-DEFINE_SET_INV_FLOAT(SetWeaponRumbleRightMotor, sets right motor strength);
-DEFINE_SET_INV_FLOAT(SetWeaponRumbleLeftMotor, sets left motor strength);
-DEFINE_SET_INV_FLOAT(SetWeaponRumbleWavelength, sets rumble wavelength);
+DEFINE_SET_INV_FLOAT(SetWeaponAnimJamTime, SetAnimJamTime);
+DEFINE_SET_INV_FLOAT(SetWeaponAnimReloadTime, SetAnimReloadTime);
+DEFINE_SET_INV_FLOAT(SetWeaponAnimShotsPerSec, SetAnimShotsPerSec);
+DEFINE_SET_INV_FLOAT(SetWeaponFireDelayMin, SetFireDelayMin);
+DEFINE_SET_INV_FLOAT(SetWeaponFireDelayMax, SetFireDelayMax);
+DEFINE_SET_INV_FLOAT(SetWeaponRumbleDuration, SetRumbleDuration);
+DEFINE_SET_INV_FLOAT(SetWeaponRumbleRightMotor, SetRumbleRightMotor);
+DEFINE_SET_INV_FLOAT(SetWeaponRumbleLeftMotor, SetRumbleLeftMotor);
+DEFINE_SET_INV_FLOAT(SetWeaponRumbleWavelength, SetRumbleWavelength);
 DEFINE_GET_INV_COND(GetArmorARAlt, GetArmorArmorRatingAlt, returns the armor rating of the specified armor.);
 DEFINE_SET_INV_INT(SetArmorARAlt, SetArmorArmorRatingAlt, sets the armor rating of the armor.);
 

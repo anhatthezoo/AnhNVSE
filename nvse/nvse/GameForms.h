@@ -4980,13 +4980,30 @@ public:
 
 STATIC_ASSERT(sizeof(TESObjectARMA) == 0x180);
 
+//credits to jazzisparis
 // BGSEncounterZone (30)
 class BGSEncounterZone : public TESForm
 {
+public:
 	BGSEncounterZone();
 	~BGSEncounterZone();
 
-	UInt32 unk018[(0x30-0x18) >> 2];	// 018
+	enum ZoneFlags : UInt8						//credits to Demorome
+	{
+		kEncounterZone_NoRespawns = 1,
+		kEncounterZone_StrictMinimumLevel = 2
+	};
+
+	TESForm* owner;			// 18
+	UInt8		rank;			// 1C
+	UInt8		minLevel;		// 1D
+	UInt8		zoneFlags;		// 1E
+	UInt8		byte1F;			// 1F
+	UInt32		detachTime;		// 20
+	UInt32		attachTime;		// 24
+	UInt32		resetTime;		// 28
+	UInt16		zoneLevel;		// 2C
+	UInt8		pad2E[2];		// 2E
 };
 
 // BGSMessage (40)

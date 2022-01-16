@@ -2,6 +2,7 @@
 
 DEFINE_COMMAND_PLUGIN(UpdateTubeMesh, "", 1, 5, kParams_OneString_OneInt_ThreeArrays);
 
+#if RUNTIME
 bool Cmd_UpdateTubeMesh_Execute(COMMAND_ARGS) {
 	*result = 0;
 	char boneName[0x40];
@@ -45,3 +46,5 @@ bool Cmd_UpdateTubeMesh_Execute(COMMAND_ARGS) {
 	}
 	return true;
 }
+
+#endif

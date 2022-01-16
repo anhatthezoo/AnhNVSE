@@ -157,6 +157,9 @@
     <ClInclude Include="internal\utility.h">
       <Filter>internal</Filter>
     </ClInclude>
+    <ClInclude Include="functions\fn_misc.h">
+      <Filter>functions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="exports.def" />

@@ -2,16 +2,10 @@
 
 #include <string>
 
-static ParamInfo kParams_OneString_OneInt_OneString[3] =
-{
-	{	"string",	kParamType_String,	0	},
-	{	"max_length",	kParamType_Integer,	0	},
-	{	"string",	kParamType_String,	0	},
-};
-
 DEFINE_COMMAND_PLUGIN(ScancodeToChar, "Converts a scancode int to string", 0, 1, kParams_OneInt)
 DEFINE_COMMAND_PLUGIN(Sv_PadStart, "Pad a character to the start of a string", 0, 3, kParams_OneString_OneInt_OneString)
 DEFINE_COMMAND_PLUGIN(Sv_PadEnd, "Pad a character to the end of a string", 0, 3, kParams_OneString_OneInt_OneString)
+DEFINE_COMMAND_PLUGIN(Sv_Capitalize, "", 0, 1, kParams_OneString);
 
 #if RUNTIME
 bool Cmd_Sv_PadStart_Execute(COMMAND_ARGS) {
@@ -30,7 +24,7 @@ bool Cmd_Sv_PadStart_Execute(COMMAND_ARGS) {
 		src1.insert(0, tempStr.substr(0, (targetLen - src1.length())));
 		strcpy(newChar, src1.c_str());
 		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, newChar);
-		return true;
+	
 	}
 
 	return true;
@@ -52,7 +46,7 @@ bool Cmd_Sv_PadEnd_Execute(COMMAND_ARGS) {
 		src1.append(tempStr.substr(0, (targetLen - src1.length())));
 		strcpy(newChar, src1.c_str());
 		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, newChar);
-		return true;
+	
 	}
 
 	return true;
@@ -72,9 +66,23 @@ bool Cmd_ScancodeToChar_Execute(COMMAND_ARGS) {
 			}
 		}
 		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, tempChar);
-		return true;
+	
 	}
 	return true;
 }
+
+bool Cmd_Sv_Capitalize_Execute(COMMAND_ARGS) {
+	*result = 0;
+	char srcString[0x80];
+
+	if (ExtractArgsEx(EXTRACT_ARGS_EX, &srcString)) {
+		std::string src1 = std::string(srcString);
+		src1[0] = std::toupper(src1[0]);
+		g_stringvarInterface->Assign(PASS_COMMAND_ARGS, src1.c_str());
+	}
+
+	return true;
+}
+
 #endif
 
