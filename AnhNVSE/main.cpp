@@ -212,7 +212,6 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	/*3629*/ REG_CMD(GetZoneLevel);
 	/*362A*/ REG_CMD(SetZoneMinLevel);
 	/*362B*/ REG_CMD(SetZoneOwner);
-
 	
 	return true;
 }

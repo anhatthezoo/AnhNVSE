@@ -1,11 +1,23 @@
 #pragma once
 
+// 10
+class ExtraEncounterZone : public BSExtraData
+{
+public:
+	ExtraEncounterZone();
+	virtual ~ExtraEncounterZone();
+
+	BGSEncounterZone* zone;		// 0C
+};
+
+
 DEFINE_COMMAND_PLUGIN(GetZoneMinLevel, "", 0, 1, kParams_OneForm)
 DEFINE_COMMAND_PLUGIN(GetZoneMatchLevel, "", 0, 1, kParams_OneForm)
 DEFINE_COMMAND_PLUGIN(GetZoneOwner, "", 0, 1, kParams_OneForm)
 DEFINE_COMMAND_PLUGIN(GetZoneLevel, "", 0, 1, kParams_OneForm)
 DEFINE_COMMAND_PLUGIN(SetZoneMinLevel, "", 0, 2, kParams_OneForm_OneInt)
 DEFINE_COMMAND_PLUGIN(SetZoneOwner, "", 0, 2, kParams_TwoForms)
+//DEFINE_COMMAND_PLUGIN(SetCellEncounterZone, "", 0, 2, kParams_TwoForms);
 
 bool Cmd_GetZoneMinLevel_Execute(COMMAND_ARGS) {
 	*result = -1;
@@ -59,17 +71,6 @@ bool Cmd_SetZoneMinLevel_Execute(COMMAND_ARGS) {
 	return true;
 }
 
-/*bool Cmd_SetZoneMatchLevel_Execute(COMMAND_ARGS) {
-	*result = 0;
-	TESForm* form;
-	bool setMatchLvl;
-	if (ExtractArgsEx(EXTRACT_ARGS_EX, &form, &setMatchLvl)) {
-		if (auto const zone = DYNAMIC_CAST(form, TESForm, BGSEncounterZone))
-			
-	}
-	return true;
-} */
-
 bool Cmd_SetZoneOwner_Execute(COMMAND_ARGS) {
 	*result = 0;
 	TESForm* zoneForm;
@@ -80,3 +81,21 @@ bool Cmd_SetZoneOwner_Execute(COMMAND_ARGS) {
 	}
 	return true;
 }
+
+/*bool Cmd_SetCellEncounterZone_Execute(COMMAND_ARGS) {			//code is mostly from JIP's SetCellWaterForm
+	*result = 0;
+	TESObjectCELL* cell;
+	TESForm* zoneForm;
+	if (ExtractArgsEx(EXTRACT_ARGS_EX, &cell, &zoneForm) && (!zoneForm || IS_ID(zoneForm, BGSEncounterZone))) {
+		ExtraEncounterZone* xEncZone = GetExtraType(&cell->extraDataList, EncounterZone);
+		Console_Print(std::to_string(xEncZone->zone->refID).c_str());
+		if (xEncZone) {
+			auto const zone = DYNAMIC_CAST(zoneForm, TESForm, BGSEncounterZone);
+			if (zone) xEncZone->zone = zone;
+			else cell->extraDataList.RemoveExtra(xEncZone, true);
+		}
+		else if (zoneForm) cell->extraDataList.AddExtra(ExtraEncounterZone::Create(zoneForm->refID, kExtraData_EncounterZone, 0x1015C54));
+
+	}
+	return true;
+} */

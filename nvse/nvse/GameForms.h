@@ -3462,6 +3462,9 @@ public:
 // NavMeshInfoMap (40)
 class NavMeshInfoMap;
 
+// NavMesh (108)
+class NavMesh;
+
 // TESObjectCELL (E0)
 class TESObjectCELL : public TESForm
 {
@@ -3470,44 +3473,108 @@ public:
 	~TESObjectCELL();
 
 	typedef tList<TESObjectREFR> RefList;
-	struct CellCoordinates
+	
+	struct ExteriorCoords
 	{
-		UInt32	x;
-		UInt32	y;
-	}; // Exterior is 3 DWord, Interior is 5 DWord and 5 floats
+		SInt32		x;			// 00
+		SInt32		y;			// 04
+		UInt8		byte08;		// 08
+		UInt8		pad09[3];	// 09
+	};
+	struct Color
+	{
+		UInt8 r;
+		UInt8 g;
+		UInt8 b;
+		UInt8 alpha;
+	};
+	struct LightingData
+	{
+		Color		ambientRGB;		// 00
+		Color		directionalRGB;		// 04
+		Color		fogRGB;		// 08
+		float		fogNear;		// 0C
+		float		fogFar;		// 10
+		int			directionalRotXY;		// 14
+		int			directionalRotZ;		// 18
+		float		directionalFade;		// 1C
+		float		fogClipDist;		// 20
+		float		fogPower;		// 24
+		UInt32*		getValuesFrom;		// 28
+	};
 
-	TESFullName				fullName;			// 018	// 030 in GECK
-	UInt8					cellFlags;			// 024
-	UInt8					byte25;				// 025
-	UInt8					flags2;				// 026	// 5 or 6 would mean cell is loaded, name based on OBSE
-	UInt8					unk027;				// 027
-	ExtraDataList			extraDataList;		// 028
-	CellCoordinates			* coords;			// 048
-	TESObjectLAND			* land;				// 04C
-	float					unk050;				// 050
-	TESTexture				texture054;			// 054
-	void					* NavMeshArray;		// 060	?$BSSimpleArray@VNavMeshPtr@@$0EAA@@@
-	UInt32					unk064[(0x0A4-0x064) >> 2];	// 064	080 is CellRefLock semaphore
-	UInt32					actorCount;			// 0A4
-	UInt16					countVisibleWhenDistant;	// 0A8
-	UInt16					unk0AA;				// 0AA
-	RefList					objectList;			// 0AC
-	NiNode					* niNode0B4;		// 0B4
-	NiNode					* niNode0B8;		// 0B8
-	UInt32					unk0BC;				// 0BC
-	TESWorldSpace			* worldSpace;		// 0C0
-	NiNode					* unk0C4;			// 0C4	structure (NiNode) containing at 20 a vector XYZT, 4C a list of scripted references, 5C a list of refer with activateRefChildren
-	float					unk0C8;				// 0C8
-	UInt32					unk0CC;				// 0CC
-	UInt32					unk0D0;				// 0D0
-	BSPortalGraph			* portalGraph;		// 0D4
-	BGSLightingTemplate		* lightingTemplate;	// 0D8
-	UInt32					unk0DC;				// 0DC
+	union CellCoordinates
+	{
+		ExteriorCoords	*exterior;
+		LightingData	*interior;
+	};
+
+	// 64
+	struct CellRenderData
+	{
+		NiNode									*masterNode;	// 00
+		tList<TESObjectREFR>					list04;			// 04
+		NiTMapBase<TESObjectREFR*, NiNode*>		map0C;			// 0C
+		NiTMapBase<TESForm*, TESObjectREFR*>	map1C;			// 1C
+		NiTMapBase<TESObjectREFR*, NiNode*>		map2C;			// 2C
+		NiTMapBase<TESObjectREFR*, NiNode*>		map3C;			// 3C
+		tList<TESObjectREFR>					list4C;			// 4C
+		tList<void>								list54;			// 54
+		tList<TESObjectREFR>					list5C;			// 5C
+	};
+
+	enum
+	{
+		kCellFlag_IsInterior =					1 << 0,
+		kCellFlag_HasWater =					1 << 1,
+		kCellFlag_InvertFastTravelBehavior =	1 << 2,
+		kCellFlag_ForceHideLand =				1 << 3,
+		kCellFlag_PublicPlace =					1 << 5,
+		kCellFlag_HandChanged =					1 << 6,
+		kCellFlag_BehaveLikeExterior =			1 << 7,
+	};
+
+	TESFullName				fullName;				// 18
+	UInt8					cellFlags;				// 24
+	UInt8					byte25;					// 25
+	UInt8					byte26;					// 26	5 or 6 would mean cell is loaded
+	UInt8					byte27;					// 27
+	ExtraDataList			extraDataList;			// 28
+	CellCoordinates			coords;					// 48
+	TESObjectLAND			*land;					// 4C
+	float					waterHeight;			// 50
+	UInt32					unk54;					// 54
+	TESTexture				noiseTexture;			// 58
+	BSSimpleArray<NavMesh>	*navMeshArray;			// 64
+	UInt32					unk68[6];				// 68
+	void					*refLockSemaphore;		// 80
+	UInt32					unk84[8];				// 84
+	UInt32					actorCount;				// A4
+	UInt16					countVisibleDistant;	// A8
+	UInt16					unkAA;					// AA
+	RefList					objectList;				// AC
+	NiNode					*niNodeB4;				// B4
+	NiNode					*niNodeB8;				// B8
+	UInt32					unkBC;					// BC
+	TESWorldSpace			*worldSpace;			// C0
+	CellRenderData			*renderData;			// C4
+	float					fltC8;					// C8
+	UInt8					byteCC;					// CC
+	UInt8					byteCD;					// CD
+	UInt8					byteCE;					// CE
+	UInt8					byteCF;					// CF
+	UInt8					byteD0;					// D0
+	UInt8					byteD1;					// D1
+	UInt8					byteD2;					// D2
+	UInt8					byteD3;					// D3
+	BSPortalGraph			*portalGraph;			// D4
+	BGSLightingTemplate		*lightingTemplate;		// D8
+	UInt32					inheritFlags;			// DC
 
 	bool IsInterior() { return worldSpace == NULL; }
+	NiNode *Get3DNode(UInt32 index);
+	void ToggleNodes(UInt32 nodeBits, UInt8 doHide);
 };
-STATIC_ASSERT(offsetof(TESObjectCELL, NavMeshArray) == 0x060);
-STATIC_ASSERT(offsetof(TESObjectCELL, objectList) == 0x0AC);
 STATIC_ASSERT(sizeof(TESObjectCELL) == 0xE0);
 
 // TESObjectREFR (60) - see GameObjects.h
@@ -3627,9 +3694,6 @@ STATIC_ASSERT(offsetof(TESWorldSpace, max) == 0x0A8);
 
 // TESObjectLAND (2C)
 class TESObjectLAND;
-
-// NavMesh (108)
-class NavMesh;
 
 struct Condition {
 	UInt8			type;		// 000

@@ -2,6 +2,7 @@
 
 // Added to remove a cyclic dependency between GameForms.h and GameExtraData.h
 #include "Utilities.h"
+#include "PluginAPI.h"
 
 class TESForm;
 
@@ -49,9 +50,19 @@ struct BaseExtraList
 		return ThisStdCall<BSExtraData*>(0x40FF60, this, toAdd);
 	}
 
+	__forceinline BSExtraData* AddExtra(BSExtraData* toAdd)			//JIP
+	{
+		return ThisCall<BSExtraData*>(0x40FF60, this, toAdd);
+	}
+
 	__forceinline void RemoveAll(bool doFree)
 	{
 		ThisStdCall(0x40FAE0, this, doFree);
+	}
+
+	__forceinline void RemoveExtra(BSExtraData* toRemove, bool doFree)			//JIP
+	{
+		ThisCall(0x410020, this, toRemove, doFree);
 	}
 
 	bool MarkScriptEvent(UInt32 eventMask, TESForm* eventTarget);

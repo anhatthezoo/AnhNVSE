@@ -284,6 +284,8 @@ enum ExtraDataType : UInt8
 extern char * GetExtraDataValue(BSExtraData* traverse);
 extern const char* GetExtraDataName(UInt8 ExtraDataType);
 
+#define GetExtraType(xDataList, Type) (Extra ## Type*)(xDataList)->GetByType(kExtraData_ ## Type)
+
 // 014
 class ExtraAction : public BSExtraData
 {
