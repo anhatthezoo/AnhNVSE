@@ -16,7 +16,7 @@ DEFINE_COMMAND_ALT_PLUGIN(GetZoneMatchLevel, AreWeAMatchInTheZoneOrWillIBeFriend
 DEFINE_COMMAND_ALT_PLUGIN(GetZoneOwner, WhosTheZoner, "", 0, 1, kParams_OneForm)
 DEFINE_COMMAND_ALT_PLUGIN(GetZoneLevel, ImInTheZoneButIWantToKnowMyLevel, "", 0, 1, kParams_OneForm)
 DEFINE_COMMAND_ALT_PLUGIN(SetZoneMinLevel, IfYouWannaBeInTheZoneYouGottaBeThisLevelMinimum, "", 0, 2, kParams_OneForm_OneInt)
-DEFINE_COMMAND_ALT_PLUGIN(SetZoneOwner, "", ImTheZoner, 0, 2, kParams_TwoForms)
+DEFINE_COMMAND_ALT_PLUGIN(SetZoneOwner, ImTheZoner, "", 0, 2, kParams_TwoForms)
 //DEFINE_COMMAND_PLUGIN(SetCellEncounterZone, "", 0, 2, kParams_TwoForms);
 
 bool Cmd_GetZoneMinLevel_Execute(COMMAND_ARGS) {
