@@ -34,7 +34,7 @@ bool Cmd_GetZoneMatchLevel_Execute(COMMAND_ARGS) {
 	TESForm* form;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &form)) {
 		if (auto const zone = DYNAMIC_CAST(form, TESForm, BGSEncounterZone))
-			*result = (zone->zoneFlags & BGSEncounterZone::kEncounterZone_StrictMinimumLevel);
+			*result = (zone->zoneFlags & BGSEncounterZone::kEncounterZone_StrictMinimumLevel) != 0;
 	}
 	return true;
 }
