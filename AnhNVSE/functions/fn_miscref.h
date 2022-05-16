@@ -1,6 +1,6 @@
 #pragma once
 
-DEFINE_COMMAND_PLUGIN(UpdateTubeMesh, "", 1, 5, kParams_OneString_OneInt_ThreeArrays);
+DEFINE_COMMAND_ALT_PLUGIN(UpdateTubeMesh, QuitMeshinWithMeAndUpdateAlready, "", 1, 5, kParams_OneString_OneInt_ThreeArrays);
 
 #if RUNTIME
 
