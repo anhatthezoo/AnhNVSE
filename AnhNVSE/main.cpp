@@ -6,6 +6,7 @@
 #include "nvse/GameObjects.h"
 #include "nvse/GameForms.h"
 #include "nvse/GameData.h"
+#include "nvse/GameUI.h"
 #include "nvse/NiNodes.h"
 #include "nvse/NiObjects.h"
 #include "nvse/NiTypes.h"
@@ -16,16 +17,22 @@
 IDebugLog		gLog("AnhNVSE.log");
 PluginHandle	g_pluginHandle = kPluginHandle_Invalid;
 
-NVSEMessagingInterface* g_messagingInterface;
+
+#if RUNTIME
+NVSEScriptInterface* g_script;
 NVSEStringVarInterface* g_stringvarInterface;
 NVSEArrayVarInterface* g_arrInterface;
+
+NVSEMessagingInterface* g_messagingInterface;
 NVSEInterface* g_nvseInterface;
 NVSECommandTableInterface* g_cmdTable;
 DataHandler* g_dataHandler;
 const CommandInfo* g_TFC;
+HUDMainMenu* g_HUDMainMenu;
+ComputersMenu* g_ComputersMenu;
 
-#if RUNTIME  
-NVSEScriptInterface* g_script;
+bool (*ExtractArgsEx)(COMMAND_ARGS_EX, ...);
+bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char* buffer, COMMAND_ARGS_EX, UInt32 maxParams, ...);
 #endif
 
 #ifndef RegisterScriptCommand
@@ -38,10 +45,6 @@ NVSEScriptInterface* g_script;
 #define REG_CMD_AMB(name) nvse->RegisterTypedCommand(&kCommandInfo_##name, kRetnType_Ambiguous); //From JIPLN
 #endif
 
-bool (*ExtractArgsEx)(COMMAND_ARGS_EX, ...);
-bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_EX, UInt32 maxParams, ...);
-
-
 #include "functions/fn_arrays.h"
 #include "functions/fn_math.h"
 #include "functions/fn_strings.h"
@@ -49,6 +52,7 @@ bool (*ExtractFormatStringArgs)(UInt32 fmtStringPos, char *buffer, COMMAND_ARGS_
 #include "functions/fn_inventory.h"
 #include "functions/fn_miscref.h"
 #include "functions/fn_misc.h"
+#include "functions/fn_rcpaint.h"
 
 // This is a message handler for nvse events
 // With this, plugins can listen to messages such as whenever the game loads
@@ -58,6 +62,8 @@ void MessageHandler(NVSEMessagingInterface::Message* msg)
 	{
 	case NVSEMessagingInterface::kMessage_DeferredInit:
 		Console_Print("AnhNVSE v1.2.0");
+		//Console_Print(std::to_string(offsetof(NiAVObject, m_transformLocal.translate.x)).c_str());
+
 		break;
 	case NVSEMessagingInterface::kMessage_SaveGame:
 		//_MESSAGE("Received save game message with file path %s", msg->data);
@@ -124,7 +130,6 @@ bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 			return false;
 		}
 	}
-
 	else
 	{
 		if (nvse->editorVersion < CS_VERSION_1_4_0_518)
@@ -212,6 +217,11 @@ bool NVSEPlugin_Load(const NVSEInterface* nvse)
 	/*3629*/ REG_CMD(GetZoneLevel);
 	/*362A*/ REG_CMD(SetZoneMinLevel);
 	/*362B*/ REG_CMD(SetZoneOwner);
+
+	// ===== v1.3.0 =====
+	///*362C*/ REG_CMD(RCPAddMenuItem);
+	///*362D*/ REG_CMD(RCPImportImage);
+	
 	
 	return true;
 }

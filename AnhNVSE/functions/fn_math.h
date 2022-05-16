@@ -130,7 +130,7 @@ DEFINE_COMMAND_PLUGIN(GenerateBezierPoint, "", 0, 4, kParams_ThreeArrays_OneFloa
 DEFINE_COMMAND_PLUGIN(V3Mult, "", 0, 2, kParams_TwoArrays);
 DEFINE_COMMAND_PLUGIN(V3MultByScalar, "", 0, 2, kParams_OneArray_OneFloat);
 
-#if RUNTIME
+//#if RUNTIME
 bool Cmd_RadToDeg_Execute(COMMAND_ARGS) {
 	float rad;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &rad)) {
@@ -562,6 +562,6 @@ bool Cmd_V3MultByScalar_Execute(COMMAND_ARGS) {
 	return true;
 }
 
-#endif 
+//#endif 
 
 
