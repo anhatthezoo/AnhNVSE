@@ -84,5 +84,7 @@ bool Cmd_Sv_Capitalize_Execute(COMMAND_ARGS) {
 	return true;
 }
 
+//bool Cmd_ArrayToString_
+
 #endif
 

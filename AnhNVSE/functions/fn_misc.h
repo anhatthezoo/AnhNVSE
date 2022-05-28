@@ -16,7 +16,7 @@ DEFINE_COMMAND_ALT_PLUGIN(GetZoneMatchLevel, AreWeAMatchInTheZoneOrWillIBeFriend
 DEFINE_COMMAND_ALT_PLUGIN(GetZoneOwner, WhosTheZoner, "", 0, 1, kParams_OneForm)
 DEFINE_COMMAND_ALT_PLUGIN(GetZoneLevel, ImInTheZoneButIWantToKnowMyLevel, "", 0, 1, kParams_OneForm)
 DEFINE_COMMAND_ALT_PLUGIN(SetZoneMinLevel, IfYouWannaBeInTheZoneYouGottaBeThisLevelMinimum, "", 0, 2, kParams_OneForm_OneInt)
-DEFINE_COMMAND_ALT_PLUGIN(SetZoneOwner, ImTheZoner, "", 0, 2, kParams_TwoForms)
+DEFINE_COMMAND_ALT_PLUGIN(SetZoneOwner, ImTheZoner, "", 0, 2, kParams_OneForm_OneOptionalForm)
 
 bool Cmd_GetZoneMinLevel_Execute(COMMAND_ARGS) {
 	*result = -1;
@@ -76,7 +76,10 @@ bool Cmd_SetZoneOwner_Execute(COMMAND_ARGS) {
 	TESForm* ownerForm;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &zoneForm, &ownerForm)) {
 		if (auto const zone = DYNAMIC_CAST(zoneForm, TESForm, BGSEncounterZone))
-			zone->owner = ownerForm;
+			if (ownerForm->refID == 0x14 || !ownerForm) zone->owner = PlayerCharacter::GetSingleton()->baseForm;
+			else zone->owner = ownerForm; 
+
+				
 	}
 	return true;
 }

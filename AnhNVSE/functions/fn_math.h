@@ -122,7 +122,7 @@ DEFINE_COMMAND_PLUGIN(V3Dotproduct, "", 0, 2, kParams_TwoArrays);
 DEFINE_COMMAND_PLUGIN(DegToRad, "Converts degrees to radians", 0, 1, kParams_OneFloat)
 DEFINE_COMMAND_PLUGIN(RadToDeg, "Converts radians to degrees", 0, 1, kParams_OneFloat)
 DEFINE_COMMAND_PLUGIN(GetAngleQuadrant, "Returns the quadrant of an angle (radian)", 0, 1, kParams_OneFloat)
-DEFINE_COMMAND_PLUGIN(Sinh, "Hyperbolic sin of angle", 0, 1, kParams_OneDouble)
+DEFINE_COMMAND_PLUGIN(Sinh, "Hyperbolic sin of angle", 0, 1, kParams_OneFloat)
 DEFINE_COMMAND_PLUGIN(Cosh, "Hyperbolic cos of angle", 0, 1, kParams_OneDouble)
 DEFINE_COMMAND_PLUGIN(Tanh, "Hyperbolic tan of angle", 0, 1, kParams_OneDouble)
 DEFINE_COMMAND_PLUGIN(V3Lerp, "", 0, 3, kParams_TwoArrays_OneFloat)
@@ -160,28 +160,27 @@ bool Cmd_GetAngleQuadrant_Execute(COMMAND_ARGS) {
 }
 
 bool Cmd_Sinh_Execute(COMMAND_ARGS) {
-	double angle;
+	float angle;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &angle)) {
 		*result = sinh(angle);
-		return true;
 	}
 	return true;
 }
 
 bool Cmd_Cosh_Execute(COMMAND_ARGS) {
 	double angle;
-	if (ExtractArgsEx(EXTRACT_ARGS_EX, &angle)) {
-		*result = cosh(angle);
-		return true;
+	int inRad;
+	if (ExtractArgsEx(EXTRACT_ARGS_EX, &angle, &inRad)) {
+		 *result = cosh(angle);
 	}
 	return true;
 }
 
 bool Cmd_Tanh_Execute(COMMAND_ARGS) {
 	double angle;
-	if (ExtractArgsEx(EXTRACT_ARGS_EX, &angle)) {
+	int inRad;
+	if (ExtractArgsEx(EXTRACT_ARGS_EX, &angle, &inRad)) {
 		*result = tanh(angle);
-		return true;
 	}
 	return true;
 }

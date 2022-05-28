@@ -412,6 +412,11 @@ static ParamInfo kParams_OneDouble[] = {
 	{	"Double", kParamType_Double, 0	}
 };
 
+static ParamInfo kParams_TwoDoubles[2] = {
+	{	"Double", kParamType_Double, 0	},
+	{	"Double", kParamType_Double, 0	}
+};
+
 static ParamInfo kParams_TwoArrays_OneFloat_OneInt[4] = {
 	{"array", kParamType_Integer, 0},
 	{"float", kParamType_Float, 0},
