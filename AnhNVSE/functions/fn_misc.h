@@ -73,10 +73,10 @@ bool Cmd_SetZoneMinLevel_Execute(COMMAND_ARGS) {
 bool Cmd_SetZoneOwner_Execute(COMMAND_ARGS) {
 	*result = 0;
 	TESForm* zoneForm;
-	TESForm* ownerForm;
+	TESForm* ownerForm = nullptr;
 	if (ExtractArgsEx(EXTRACT_ARGS_EX, &zoneForm, &ownerForm)) {
 		if (auto const zone = DYNAMIC_CAST(zoneForm, TESForm, BGSEncounterZone))
-			if (ownerForm->refID == 0x14 || !ownerForm) zone->owner = PlayerCharacter::GetSingleton()->baseForm;
+			if ((ownerForm != nullptr && ownerForm->refID == 0x14) || !ownerForm) zone->owner = PlayerCharacter::GetSingleton()->baseForm;
 			else zone->owner = ownerForm; 
 
 				
