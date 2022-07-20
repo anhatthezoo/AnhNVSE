@@ -61,7 +61,7 @@ void MessageHandler(NVSEMessagingInterface::Message* msg)
 	switch (msg->type)
 	{
 	case NVSEMessagingInterface::kMessage_DeferredInit:
-		Console_Print("AnhNVSE v1.2.1");
+		Console_Print("AnhNVSE v1.2.2");
 
 		break;
 	case NVSEMessagingInterface::kMessage_SaveGame:
@@ -106,7 +106,7 @@ bool NVSEPlugin_Query(const NVSEInterface* nvse, PluginInfo* info)
 	// fill out the info structure
 	info->infoVersion = PluginInfo::kInfoVersion;
 	info->name = "AnhNVSE";
-	info->version = 121;
+	info->version = 122;
 
 	// version checks
 	if (nvse->nvseVersion < PACKED_NVSE_VERSION)
